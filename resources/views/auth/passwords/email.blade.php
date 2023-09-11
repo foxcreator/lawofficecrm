@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.notauth')
 
 @section('content')
-<div class="container">
+<div class="login-box w-75">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
