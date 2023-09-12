@@ -16,7 +16,7 @@
 
                     <div class="input-group mb-3">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                               name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                               name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Им'я" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -30,8 +30,23 @@
                     </div>
 
                     <div class="input-group mb-3">
+                        <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror"
+                               name="surname" value="{{ old('surname') }}" required autocomplete="surname" placeholder="Призвище" autofocus>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        @error('surname')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+
+                    <div class="input-group mb-3">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                               name="email" value="{{ old('email') }}" required autocomplete="email">
+                               name="email" value="{{ old('email') }}" required placeholder="Email" autocomplete="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

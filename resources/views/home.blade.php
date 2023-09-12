@@ -56,6 +56,7 @@
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                     <thead>
+                    @if(Auth::user()->role !== \App\Models\User::ROLE_ADMIN)
                     <tr>
                         <th>ID</th>
                         <th>Клиент</th>
@@ -65,6 +66,7 @@
                         <th>Статья</th>
                         <th>Стадия выполнения</th>
                     </tr>
+                    @endif
                     </thead>
                     <tbody>
                     <tr>

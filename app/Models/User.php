@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 0;
+    const ROLE_MANAGER = 1;
+    const ROLE_ADVOCATE = 2;
+    const ROLE_GUEST = 3;
     /**
      * The attributes that are mass assignable.
      *
@@ -44,14 +48,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role()
+    public function getRole()
     {
-        return $this->belongsTo(Role::class, 'role');
+        return [
+            self::ROLE_ADMIN => 'Директор',
+            self::ROLE_MANAGER => 'Консультант',
+            self::ROLE_ADVOCATE => 'Адвокат',
+            self::ROLE_GUEST => 'Гість',
+        ];
     }
 
-
-    public function hasRole($role)
+    public function getRoleNameAttribute()
     {
-        return $this->roles()->where('role', $role)->exists();
+        $roles = $this->getRole();
+        return $roles[$this->attributes['role']];
     }
+
 }
