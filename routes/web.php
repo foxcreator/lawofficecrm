@@ -40,9 +40,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/employee/toggle-working/{id}', [App\Http\Controllers\Admin\EmployeeController::class, 'toggleWorking'])
             ->name('admin.employee.toggle-working');
 
-
         Route::get('/employee/{id}', [\App\Http\Controllers\Admin\EmployeeController::class, 'employeeCard'])
             ->name('employee');
+
+    Route::get('/visitors/all/{status}', [\App\Http\Controllers\Services\VisitorsController::class, 'index'])
+        ->name('visitors.index');
+    Route::get('/visitors/create', [\App\Http\Controllers\Services\VisitorsController::class, 'create'])
+        ->name('visitors.create');
     });
+
 });
 //* TODO make functionality for reset password with Email  */

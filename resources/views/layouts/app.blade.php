@@ -75,6 +75,9 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('visitors.create') }}">Visitors</a>
+            </li>
         </ul>
 
         <!-- Right navbar links -->
@@ -187,13 +190,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                <a href="{{ route('visitors.index', \App\Models\Visitor::IS_GUEST) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Гості</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
+                                <a href="{{ route('visitors.index', \App\Models\Visitor::IS_CLIENT) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Клієнти</p>
                                 </a>
