@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{{--    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--}}
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
@@ -38,13 +38,34 @@
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bs-stepper/css/bs-stepper.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
 <div class="wrapper">
+
+    @if (session('status'))
+        <script>
+            $(document).ready(function() {
+                toastr.success("{{ session('status') }}");
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            $(document).ready(function() {
+                toastr.error("{{ session('error') }}");
+            });
+        </script>
+@endif
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{ asset('assets/dist/img/Low_CRM_logo') }}" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
     </div>
 
     <!-- Navbar -->
@@ -93,9 +114,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-blue-my">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link align-items-center">
-            <img src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
+        <a href="{{ route('dashboard') }}" class="brand-link align-items-center">
+            <img src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 mt-2 mr-4"
+                 style="opacity: 1">
             <span class="brand-text font-weight-light">Борисфен</span>
             <p class="brand-text font-weight-light text-white-75" style="margin-left: 40px; font-size: 16px;">
                 CRM-System</p>
@@ -109,7 +130,7 @@
                     <img src="{{ asset('assets/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Василий Самойленко</a>
+                    <a href="#" class="d-block">{{ Auth::user()->surname }} {{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -120,10 +141,10 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="{{ route('dashboard') }}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Главная
+                                Головна
                             </p>
                         </a>
                     </li>
@@ -131,7 +152,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
-                                Дела
+                                Справи
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -139,13 +160,13 @@
                             <li class="nav-item">
                                 <a href="pages/layout/top-nav.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Новое дело</p>
+                                    <p>Відкрити справу</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Открытые дела</p>
+                                    <p>Відкриті справи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -160,7 +181,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
-                                Посетители
+                                Відвідувачі
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -168,13 +189,13 @@
                             <li class="nav-item">
                                 <a href="pages/charts/chartjs.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Гости</p>
+                                    <p>Гості</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="pages/charts/flot.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Клиенты</p>
+                                    <p>Клієнти</p>
                                 </a>
                             </li>
                         </ul>
@@ -183,7 +204,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tree"></i>
                             <p>
-                                Сотрудники
+                                Співробітники
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -191,13 +212,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.employee.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Новый сотрудник</p>
+                                    <p>Новий співробітник</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.employee.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Все сотрудники</p>
+                                    <p>Всі співробітники</p>
                                 </a>
                             </li>
                         </ul>
@@ -206,9 +227,9 @@
 
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('employee', Auth::user()) }}" class="nav-link">
                             <i class="nav-icon far fa-circle text-info"></i>
-                            <p>Информация</p>
+                            <p>Мій профіль</p>
                         </a>
                     </li>
                 </ul>
@@ -239,7 +260,10 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <!-- jQuery -->
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
@@ -252,14 +276,14 @@
 <!-- Bootstrap 4 -->
 <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+{{--<script src="plugins/chart.js/Chart.min.js"></script>--}}
+{{--<!-- Sparkline -->--}}
+{{--<script src="plugins/sparklines/sparkline.js"></script>--}}
+{{--<!-- JQVMap -->--}}
+{{--<script src="plugins/jqvmap/jquery.vmap.min.js"></script>--}}
+{{--<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>--}}
+{{--<!-- jQuery Knob Chart -->--}}
+{{--<script src="plugins/jquery-knob/jquery.knob.min.js"></script>--}}
 <!-- Bootstrap4 Duallistbox -->
 <script src="{{ asset('assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 <!-- Select2 -->
@@ -282,9 +306,8 @@
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 <!-- bootstrap color picker -->
 <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-{{--<script src="{{ asset('assets/dist/js/demo.js') }}"></script>--}}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+
 </body>
 </html>

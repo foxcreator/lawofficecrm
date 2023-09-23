@@ -16,16 +16,24 @@ class User extends Authenticatable
     const ROLE_MANAGER = 1;
     const ROLE_ADVOCATE = 2;
     const ROLE_GUEST = 3;
+
+    const GENDER_MAN = 1;
+    const GENDER_WOMAN = 2;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'name',
+        'surname',
+        'birthdate',
+        'phone',
         'role',
+        'gender',
+        'is_working',
     ];
 
     /**
@@ -48,7 +56,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getRole()
+    public static function getRole()
     {
         return [
             self::ROLE_ADMIN => 'Директор',
@@ -64,4 +72,11 @@ class User extends Authenticatable
         return $roles[$this->attributes['role']];
     }
 
+    public static function getGender()
+    {
+        return [
+            self::GENDER_MAN => 'Чоловік',
+            self::GENDER_WOMAN => 'Жінка',
+        ];
+    }
 }
