@@ -42,12 +42,23 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/employee/{id}', [\App\Http\Controllers\Admin\EmployeeController::class, 'employeeCard'])
             ->name('employee');
-
-    Route::get('/visitors/all/{status}', [\App\Http\Controllers\Services\VisitorsController::class, 'index'])
-        ->name('visitors.index');
-    Route::get('/visitors/create', [\App\Http\Controllers\Services\VisitorsController::class, 'create'])
-        ->name('visitors.create');
     });
+//dd(User::ROLE_MANAGER);
+        Route::get('/visitors/all/{status}', [\App\Http\Controllers\Services\VisitorsController::class, 'index'])
+            ->name('visitors.index');
+        Route::get('/visitors/create', [\App\Http\Controllers\Services\VisitorsController::class, 'create'])
+            ->name('visitors.create');
+        Route::post('/visitors/store', [\App\Http\Controllers\Services\VisitorsController::class, 'store'])
+            ->name('visitors.store');
+        Route::get('/visitor/{id}', [\App\Http\Controllers\Services\VisitorsController::class, 'visitorCard'])
+            ->name('visitor');
+        Route::get('/visitors/edit/{id}', [\App\Http\Controllers\Services\VisitorsController::class, 'edit'])
+            ->name('visitors.edit');
+        Route::post('/visitors/update/{id}', [\App\Http\Controllers\Services\VisitorsController::class, 'update'])
+            ->name('visitors.update');
+
+        //Create and view Consultations
+        Route::resource('consultations', \App\Http\Controllers\ConsultationsController::class);
 
 });
 //* TODO make functionality for reset password with Email  */

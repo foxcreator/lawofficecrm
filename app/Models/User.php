@@ -56,6 +56,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class, 'user_id');
+    }
+
+    public function courtCases()
+    {
+        return $this->hasMany(CourtCase::class, 'user_id');
+    }
+
     public static function getRole()
     {
         return [

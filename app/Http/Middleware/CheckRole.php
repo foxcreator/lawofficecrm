@@ -14,7 +14,7 @@ class CheckRole
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
 
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $role): Response
     {
         $user = $request->user();
         $userRole = $user ? strval($user->role) : null;
