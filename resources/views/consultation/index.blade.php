@@ -5,8 +5,8 @@
             <!-- Main row -->
             <div class="card-body table-responsive p-0">
                 <div class="card">
-                    <div class="card-header bg-gradient-lightblue">
-                        <h3 class="card-title"> консультацію</h3>
+                    <div class="card-header bg-gradient-navy">
+                        <h3 class="card-title">Додати консультацію</h3>
                     </div>
                     <form action="{{ route('consultations.store') }}" method="POST">
                         @csrf
@@ -29,6 +29,9 @@
                                             </span>
                                             @enderror
                                         </div>
+                                            <a href="{{ route('visitors.create') }}" class="btn btn-outline-dark col-md-1">
+                                                <i class="fas fa-user-plus"></i>
+                                            </a>
                                     </div>
 
                                     <div class="form-group row">
@@ -103,7 +106,7 @@
                                         <div class="col-sm-6">
                                             <textarea class="form-control @error('comment') is-invalid @enderror"
                                                       id="comment"
-                                                      name="comment" placeholder="Email"></textarea>
+                                                      name="comment" placeholder="Додайте коментар"></textarea>
                                             @error('comment')
                                             <span class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
@@ -114,17 +117,18 @@
                                 </div>
                             </div>
                             <div class="card-footer row d-flex justify-content-between">
+                                <div class="col-md-5"> <!-- Половина ширины (50%) -->
+                                    <a href="{{ route('visitors.create') }}"
+                                    class="btn btn-outline-dark btn-sm btn-block col-md-6">Додати нового
+                                        відвідувача</a>
+                                </div>
                                 <div class="col-md-6"> <!-- Половина ширины (50%) -->
-                                    <button type="submit" class="btn btn-sm btn-outline-success btn-block col-md-6">
+                                    <button type="submit" class="btn btn-sm btn-outline-success btn-block col-md-6 float-right">
                                         Створити
                                     </button>
                                 </div>
-                                <div class="col-md-6"> <!-- Половина ширины (50%) -->
-                                    <a href="{{ route('visitors.create') }}"
-                                       class="btn btn-outline-dark btn-sm btn-block col-md-6 float-right">Додати нового
-                                        відвідувача</a>
-                                </div>
                             </div>
+                        </div>
                     </form>
                 </div>
 
@@ -147,7 +151,7 @@
                             <tr>
                                 <td>{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
                                 <td>{{ $consultation->visitor->birthdate }}</td>
-                                <td>{{ $consultation->reception->name }}-{{ $consultation->reception->number }}</td>
+                                <td>{{ $consultation->reception->city }}-{{ $consultation->reception->number }}</td>
                                 <td>{{ $consultation->consultation_date }}</td>
                                 <td>{{ $consultation->user->surname }} {{ $consultation->user->name }}</td>
                                 <td>{{ $consultation->category->name }} </td>
@@ -163,7 +167,10 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.row (main row) -->
+            <div class="d-flex justify-content-around">
+                {{ $consultations->links() }}
+            </div>
+        <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
     </section>
 @endsection
