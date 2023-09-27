@@ -13,3 +13,7 @@
 .nav-link {
     color: #001355;
 }
+
+.additional-fields {
+    display: none;
+}

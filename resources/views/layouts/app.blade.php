@@ -33,6 +33,7 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <!-- BS Stepper -->
@@ -74,6 +75,9 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('visitors.create') }}">Visitors</a>
             </li>
         </ul>
 
@@ -178,6 +182,12 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('consultations.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-comment-alt"></i>
+                            <p>Консультації</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
@@ -187,13 +197,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                <a href="{{ route('visitors.index', \App\Models\Visitor::IS_GUEST) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Гості</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
+                                <a href="{{ route('visitors.index', \App\Models\Visitor::IS_CLIENT) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Клієнти</p>
                                 </a>
@@ -308,6 +318,16 @@
 <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
 
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+    })
+</script>
 </body>
 </html>
