@@ -42,6 +42,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/employee/{id}', [\App\Http\Controllers\Admin\EmployeeController::class, 'employeeCard'])
             ->name('employee');
+
+        Route::post('/category/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])
+            ->name('category.store');
     });
 //dd(User::ROLE_MANAGER);
         Route::get('/visitors/all/{status}', [\App\Http\Controllers\Services\VisitorsController::class, 'index'])
