@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
 if (!\Illuminate\Support\Facades\Auth::user()) {
@@ -25,7 +25,7 @@ if (!\Illuminate\Support\Facades\Auth::user()) {
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('/search', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
     Route::middleware(['checkRole:' . User::ROLE_ADMIN])->group(function () {
         Route::get('/employee-all', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])
             ->name('admin.employee.index');

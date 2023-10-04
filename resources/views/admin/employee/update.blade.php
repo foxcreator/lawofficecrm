@@ -65,10 +65,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Им'я</label>
+                        <label for="name" class="col-sm-2 col-form-label">Ім'я</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                   name="name" value="{{ $user->name }}" placeholder="Им'я" disabled>
+                                   name="name" value="{{ $user->name }}" placeholder="Ім'я" disabled>
                             @error('name')
                             <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>

@@ -40,6 +40,9 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bs-stepper/css/bs-stepper.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.css') }}">
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">--}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -89,18 +92,13 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
-                    <form class="form-inline">
+                    <form class="form-inline" action="{{ route('search') }}" method="GET">
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                            <input class="form-control" type="search" name="search" placeholder="Пошук..."
                                    aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-info btn-flat">Пошук!</button>
+                            </span>
                         </div>
                     </form>
                 </div>
@@ -118,7 +116,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-blue-my">
         <!-- Brand Logo -->
-        <a href="{{ route('dashboard') }}" class="brand-link align-items-center">
+        <a href="{{ route('dashboard') }}" class="brand-link align-items-center text-decoration-none">
             <img src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 mt-2 mr-4"
                  style="opacity: 1">
             <span class="brand-text font-weight-light">Борисфен</span>
@@ -134,7 +132,7 @@
                     <img src="{{ asset('assets/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->surname }} {{ Auth::user()->name }}</a>
+                    <a href="#" class="d-block text-decoration-none">{{ Auth::user()->surname }} {{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -182,10 +180,27 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('consultations.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-comment-alt"></i>
-                            <p>Консультації</p>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Консультації
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('consultations.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі консультаціі</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('consultations.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Нова консультація</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -318,7 +333,13 @@
 <script src="{{ asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
 
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script>
+
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
     $(function () {
         //Initialize Select2 Elements
         $('.select2').select2()
@@ -328,6 +349,7 @@
             theme: 'bootstrap4'
         })
     })
+
 </script>
 </body>
 </html>
