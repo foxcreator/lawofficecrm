@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
         //Create and view Consultations
         Route::resource('consultations', \App\Http\Controllers\ConsultationsController::class);
+        Route::resource('cases', \App\Http\Controllers\CasesController::class);
 
 });
 //* TODO make functionality for reset password with Email  */

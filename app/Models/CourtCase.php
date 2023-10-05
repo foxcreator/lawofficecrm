@@ -13,6 +13,17 @@ class CourtCase extends Model
     const WIN = 1;
     const LOSE = 2;
 
+    protected $fillable = [
+        'case_number',
+        'case_production_number',
+        'visitor_id',
+        'user_id',
+        'category_id',
+        'article_id',
+        'google_drive_link',
+        'case_status',
+    ];
+
     public function getCaseStatus()
     {
         return [
@@ -37,4 +48,8 @@ class CourtCase extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function article()
+    {
+        return $this->belongsTo(Article::class, 'article_id', 'id');
+    }
 }
