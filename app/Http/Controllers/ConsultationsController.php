@@ -17,7 +17,7 @@ class ConsultationsController extends Controller
      */
     public function index()
     {
-        $consultations = Consultation::orderBy('id', 'desc')->take(20)->paginate(3);
+        $consultations = Consultation::orderBy('id', 'desc')->take(20)->paginate(10);
         $visitors = Visitor::all();
         $users = User::query()->where('role', User::ROLE_ADVOCATE)->get();
         $categories = Category::all();
@@ -37,7 +37,17 @@ class ConsultationsController extends Controller
      */
     public function create()
     {
-        //
+        $visitors = Visitor::all();
+        $users = User::query()->where('role', User::ROLE_ADVOCATE)->get();
+        $categories = Category::all();
+        $receptions = Reception::all();
+        return view('consultation.create',
+            compact(
+                'visitors',
+                'users',
+                'categories',
+                'receptions',
+            ));
     }
 
     /**

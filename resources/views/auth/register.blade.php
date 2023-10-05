@@ -16,7 +16,7 @@
 
                     <div class="input-group mb-3">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                               name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Им'я" autofocus>
+                               name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Ім'я" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -31,7 +31,7 @@
 
                     <div class="input-group mb-3">
                         <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror"
-                               name="surname" value="{{ old('surname') }}" required autocomplete="surname" placeholder="Призвище" autofocus>
+                               name="surname" value="{{ old('surname') }}" required autocomplete="surname" placeholder="Прізвище" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>

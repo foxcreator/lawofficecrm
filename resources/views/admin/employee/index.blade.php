@@ -7,7 +7,7 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th>Призвище Им'я</th>
+                        <th>Прізвище Ім'я</th>
                         <th>Дата народження</th>
                         <th>Роль у фирмі</th>
                     </tr>
