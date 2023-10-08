@@ -160,19 +160,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                <a href="{{ route('cases.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Відкрити справу</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                <a href="{{ route('cases.index.status', 0) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Відкриті справи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/boxed.html" class="nav-link">
+                                <a href="{{ route('cases.index.status', 1) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Архив</p>
                                 </a>

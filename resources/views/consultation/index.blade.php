@@ -31,7 +31,6 @@
                                     <a type="button"
                                             data-bs-toggle="popover"
                                             data-bs-placement="left"
-{{--                                            data-bs-title="Коментар"--}}
                                             data-bs-content="{{ $consultation?->comment }}"
                                     >
                                         <i class="fas fa-comment-alt text-info"></i>
@@ -49,7 +48,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around mt-3">
                 {{ $consultations->links() }}
             </div>
         <!-- /.row (main row) -->
