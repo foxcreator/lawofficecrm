@@ -166,13 +166,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('cases.index') }}" class="nav-link">
+                                <a href="{{ route('cases.index.status', 0) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Відкриті справи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('cases.index') }}" class="nav-link">
+                                <a href="{{ route('cases.index.status', 1) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Архив</p>
                                 </a>

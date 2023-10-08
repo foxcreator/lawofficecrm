@@ -17,7 +17,7 @@ class ConsultationsController extends Controller
      */
     public function index()
     {
-        $consultations = Consultation::orderBy('id', 'desc')->take(20)->paginate(10);
+        $consultations = Consultation::orderBy('id', 'desc')->take(20)->paginate(20);
         $visitors = Visitor::all();
         $users = User::query()->where('role', User::ROLE_ADVOCATE)->get();
         $categories = Category::all();

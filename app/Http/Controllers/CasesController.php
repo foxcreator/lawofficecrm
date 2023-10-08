@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCaseRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\CourtCase;
@@ -16,7 +17,16 @@ class CasesController extends Controller
      */
     public function index()
     {
-        $cases = CourtCase::all();
+        return view('cases.index');
+    }
+
+    public function indexStatus($caseStatus)
+    {
+        if ($caseStatus == 0) {
+            $cases = CourtCase::where('case_status', 0)->paginate(20);
+        } else {
+            $cases = CourtCase::query()->whereNot('case_status', 0)->paginate(20);
+        }
         return view('cases.index', compact('cases'));
     }
 
@@ -41,10 +51,10 @@ class CasesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCaseRequest $request)
     {
-        CourtCase::create($request->all());
-        return redirect()->back();
+        CourtCase::create($request->validated());
+        return redirect()->back()->with('status', 'Справу успішно відкрито!');
     }
 
     /**
@@ -52,7 +62,8 @@ class CasesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $case = CourtCase::where('id', $id)->first();
+        return view('cases.card', compact('case'));
     }
 
     /**
@@ -60,7 +71,19 @@ class CasesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $case = CourtCase::where('id', $id)->first();
+        $visitors = Visitor::where('visitor_status', '1')->get();
+        $users = User::where('role', User::ROLE_ADVOCATE)->get();
+        $articles = Article::all();
+        $categories = Category::all();
+
+        return view('cases.edit', compact(
+            'visitors',
+            'categories',
+            'users',
+            'articles',
+            'case'
+        ));
     }
 
     /**
@@ -68,7 +91,17 @@ class CasesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // ToDo Make Validation!!
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+        $case = CourtCase::where('id', $id)->first();
+        $success = $case->update($data);
+        if ($success) {
+            return redirect()->back()->with('status', "Справу №{$case->case_number} успішно оновлено");
+        }
+
+        // ToDo make the save new comment (maybe close case add to destroy method)
     }
 
     /**

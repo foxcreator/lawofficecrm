@@ -27,9 +27,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
+// ToDo Make Sorting data in all tables
     public function search(Request $request)
     {
+        // ToDo Make a search from cases and view design maybe with tabs
         $query = $request->input('search');
         $visitorColumnsToSearch = [
             'email',

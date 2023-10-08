@@ -22,14 +22,15 @@ class CourtCase extends Model
         'article_id',
         'google_drive_link',
         'case_status',
+        'comment',
     ];
 
     public function getCaseStatus()
     {
         return [
-            self::PENDING,
-            self::WIN,
-            self::LOSE,
+            self::PENDING => 'Виконуєтся',
+            self::WIN => 'Виграна',
+            self::LOSE => 'Програна',
         ];
     }
 
@@ -51,5 +52,11 @@ class CourtCase extends Model
     public function article()
     {
         return $this->belongsTo(Article::class, 'article_id', 'id');
+    }
+
+    public function getCaseStatusNameAttribute()
+    {
+        $statuses = $this->getCaseStatus();
+        return $statuses[$this->attributes['case_status']];
     }
 }

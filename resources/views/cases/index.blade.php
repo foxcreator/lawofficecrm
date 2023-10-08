@@ -4,7 +4,9 @@
         <div class="container-fluid">
             <!-- Main row -->
             <div class="card-body table-responsive p-0">
-                <a href="{{ route('visitors.create') }}" class="btn btn-block btn-outline-dark btn-sm w-25">Додати відвідувача</a>
+                <a href="{{ route('cases.create') }}" class="btn btn-block btn-outline-dark btn-sm w-25">Відкрити справу</a>
+                @if($cases)
+
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
@@ -17,25 +19,43 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if($cases)
                         @foreach($cases as $case)
                             <tr>
                                 <td>{{ $case->case_number }}</td>
-                                <td>{{ $case->visitor->surname }} {{ $case->visitor->name }}</td>
                                 <td>{{ $case->user->surname }} {{ $case->user->name }}</td>
-                                <td>{{ $visitor->case_category }}</td>
-                                <td>{{ $visitor->article }}</td>
-                                <td>{{ $visitor->case_status }}</td>
+                                <td>{{ $case->visitor->surname }} {{ $case->visitor->name }}</td>
+                                <td>{{ $case->category->name }}</td>
+                                <td>{{ $case->article->name }}</td>
+                                <td>{{ $case->case_status_name }}</td>
                                 <td>
-                                    <a class="ml-1" href="{{ route('visitor', $visitor->id) }}" title="Детальніше">
-                                        <i class="far fa-list-alt text-primary"></i>
-                                    </a>
+                                    @if($case->comment)
+                                        <a type="button"
+                                           class="ml-1"
+                                           data-bs-toggle="popover"
+                                           data-bs-placement="left"
+                                           data-bs-content="{{ $case?->comment }}"
+                                        >
+                                            <i class="fas fa-comment-alt text-info"></i>
+                                        </a>
+                                        <a class="ml-1" href="{{ route('cases.show', $case->id) }}" title="Детальніше">
+                                            <i class="far fa-list-alt text-primary"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
-                    @endif
+
                     </tbody>
+
                 </table>
+                <div class="d-flex justify-content-around mt-3">
+                    {{ $cases->links() }}
+                </div>
+                @else
+                <div class="card-body text-center">
+                    <h2>Тут ще ничого немає</h2>
+                </div>
+                @endif
             </div>
         </div>
     </section>
