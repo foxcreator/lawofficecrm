@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     const ROLE_ADMIN = 0;
     const ROLE_MANAGER = 1;
@@ -31,7 +32,7 @@ class User extends Authenticatable
         'surname',
         'birthdate',
         'phone',
-        'role',
+//        'role',
         'gender',
         'is_working',
     ];

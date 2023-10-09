@@ -21,9 +21,11 @@ Route::get('/', function () {
 if (!\Illuminate\Support\Facades\Auth::user()) {
     Route::get('/login');
 }
-
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
+//    if (auth()->user()->role == User::ROLE_ADMIN) {
+//    }
+
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/search', [\App\Http\Controllers\HomeController::class, 'search'])->name('search');
     Route::middleware(['checkRole:' . User::ROLE_ADMIN])->group(function () {
