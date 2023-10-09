@@ -16,7 +16,7 @@
                     <div class="col-md-4 text-center">
                         <h5>Відвідувачі</h5>
                         @foreach ($visitors as $visitor)
-                            <a href="{{ route('visitor', $visitor->id) }}"> {{ $visitor->name }}</a>
+                            <a href="{{ route('visitor', $visitor->id) }}"> {{ $visitor->name }}</a><br>
                         @endforeach
                     </div>
                 @endif
@@ -26,6 +26,8 @@
                         <h5>Консультації</h5>
                         @foreach ($consultations as $consultation)
                             {{ $consultation->comment }}
+                            {{ $consultation->consultation_date }}<br>
+                            //
                         @endforeach
                     </div>
                 @endif

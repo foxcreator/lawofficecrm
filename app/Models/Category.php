@@ -18,4 +18,8 @@ class Category extends Model
         return $this->hasMany(Consultation::class, 'category_id');
     }
 
+    public function courtCases()
+    {
+        return $this->hasMany(CourtCase::class, 'case_category_id', 'id');
+    }
 }

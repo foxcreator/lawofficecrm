@@ -17,14 +17,16 @@ return new class extends Migration
             $table->string('case_production_number');
             $table->unsignedBigInteger('visitor_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('article');
-            $table->string('case_category');
+            $table->unsignedBigInteger('article_id');
+            $table->unsignedBigInteger('category_id');
             $table->string('google_drive_link');
             $table->smallInteger('case_status')->default(0);
             $table->timestamps();
 
             $table->foreign('visitor_id')->references('id')->on('visitors');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
