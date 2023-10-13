@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultation;
 use App\Models\Visitor;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -83,5 +84,17 @@ class HomeController extends Controller
 
 
         return view('search.searchResult', compact('consultations', 'visitors'));
+    }
+
+    public function contractAction(Request $request, $client)
+    {
+        $client = Visitor::find($client);
+
+        // Генерация PDF на основе шаблона и данных
+        $pdf = PDF::loadView('docs.contract', compact('client'));
+        // Скачивание PDF
+        return $pdf->download('contract.pdf');
+//        return $pdf->stream('contract.pdf');
+
     }
 }

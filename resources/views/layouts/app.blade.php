@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Borisfen | Dashboard</title>
+{{--    <title>Borisfen | Dashboard</title>--}}
+    <title>@yield('title', 'Головна|') Borisfen </title>
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -69,7 +71,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
+        <img class="animation__wobble" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
     </div>
 
     <!-- Navbar -->
@@ -132,7 +134,7 @@
                     <img src="{{ asset('assets/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block text-decoration-none">{{ Auth::user()->surname }} {{ Auth::user()->name }}</a>
+                    <a href="{{ route('employee', auth()->id()) }}" class="d-block text-decoration-none">{{ Auth::user()->surname }} {{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -140,8 +142,6 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -179,6 +179,7 @@
                             </li>
                         </ul>
                     </li>
+                    @can('consultation')
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -202,6 +203,8 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
+                    @can('visitors-all')
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
@@ -225,6 +228,8 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
+                    @can('employee-all')
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tree"></i>
@@ -248,6 +253,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
                     <li class="nav-item">
 
 
@@ -264,15 +270,14 @@
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper bg-white mt-3">
+    <div class="content-wrapper bg-white pt-3">
         <!-- Main content -->
         @yield('content')
         <!-- /.content -->
     </div>
 
     <footer class="main-footer">
-        <strong>Copyright &copy; 2019-2023 <a href="/">BSV-Develop</a>.</strong>
-        All rights reserved.
+        <strong>Copyright &copy; 2023 @if(\Carbon\Carbon::now()->year > '2023'){{ '- ' . \Carbon\Carbon::now()->year}} @endif <a href="https://www.borisfen.net/" target="_blank">ПАНП «Борисфен»</a></strong>
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0
         </div>

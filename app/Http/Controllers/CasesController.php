@@ -12,16 +12,22 @@ use Illuminate\Http\Request;
 
 class CasesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('cases.index');
+        return abort(404);
     }
 
     public function indexStatus($caseStatus)
     {
+        if (auth()->user()->hasRole(User::ROLE_ADVOCATE)) {
+            $advocateId = auth()->id();
+            if ($caseStatus == 0) {
+                $cases = CourtCase::where('case_status', 0)->where('id', $advocateId)->paginate(20);
+            } else {
+                $cases = CourtCase::query()->whereNot('case_status', 0)->where('id', $advocateId)->paginate(20);
+            }
+            return view('cases.index', compact('cases'));
+        }
         if ($caseStatus == 0) {
             $cases = CourtCase::where('case_status', 0)->paginate(20);
         } else {
@@ -30,50 +36,45 @@ class CasesController extends Controller
         return view('cases.index', compact('cases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $visitors = Visitor::where('visitor_status', '1')->get();
-        $users = User::where('role', User::ROLE_ADVOCATE)->get();
-        $articles = Article::all();
-        $categories = Category::all();
+        if (auth()->user()->can('cases')) {
 
-        return view('cases.create', compact(
-            'visitors',
-            'categories',
-            'users',
-            'articles',
-        ));
+            $visitors = Visitor::where('visitor_status', '1')->get();
+            $users = User::role('advocate')->get();
+            $articles = Article::all();
+            $categories = Category::all();
+
+            return view('cases.create', compact(
+                'visitors',
+                'categories',
+                'users',
+                'articles',
+            ));
+        }
+        abort(404);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CreateCaseRequest $request)
     {
-        CourtCase::create($request->validated());
-        return redirect()->back()->with('status', 'Справу успішно відкрито!');
+        if (auth()->user()->can('cases')) {
+            CourtCase::create($request->validated());
+            return redirect()->back()->with('status', 'Справу успішно відкрито!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $case = CourtCase::where('id', $id)->first();
         return view('cases.card', compact('case'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
+
         $case = CourtCase::where('id', $id)->first();
         $visitors = Visitor::where('visitor_status', '1')->get();
-        $users = User::where('role', User::ROLE_ADVOCATE)->get();
+        $users = User::role('advocate')->get();
         $articles = Article::all();
         $categories = Category::all();
 
@@ -86,9 +87,6 @@ class CasesController extends Controller
         ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         // ToDo Make Validation!!
@@ -101,14 +99,11 @@ class CasesController extends Controller
             return redirect()->back()->with('status', "Справу №{$case->case_number} успішно оновлено");
         }
 
-        // ToDo make the save new comment (maybe close case add to destroy method)
+        // ToDo maybe close case add to destroy method
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        abort(404);
     }
 }

@@ -104,8 +104,12 @@
                     <div class="form-group">
                         <label for="role" class="col-2 col-form-label pl-0">Роль у фирмі</label>
                         <select name="role" id="role" class="custom-select col-3 @error('role') is-invalid @enderror">
-                            <option value="{{ $user->role }}">{{ $user->role_name }}</option>
-                            @foreach($roles as $key => $role)
+                            @if($user->getRoleNames()->first())
+                            <option value="{{ $user->getRoleNames()->first() }}">
+                                {{ \App\Models\User::$roleMappings[$user->getRoleNames()->first()] }}
+                            </option>
+                            @endif
+                            @foreach(\App\Models\User::$roleMappings as $key => $role)
                                 <option value="{{ $key }}">{{ $role }}</option>
                             @endforeach
                         </select>

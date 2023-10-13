@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('birthdate')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
-            $table->unsignedSmallInteger('role')->default(3);
+//            $table->unsignedSmallInteger('role')->default(3);
+            //ToDo Research
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

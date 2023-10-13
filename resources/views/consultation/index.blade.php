@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Консультації |')
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -36,8 +37,6 @@
                                         <i class="fas fa-comment-alt text-info"></i>
                                     </a>
                                     @endif
-                                </td>
-                                <td>
                                     <a class="ml-1" href="{{ route('visitor', $consultation->visitor->id) }}" title="Детальніше">
                                         <i class="far fa-list-alt text-primary"></i>
                                     </a>

@@ -4,83 +4,47 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-4 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>15</h3>
-
-                            <p>Посетителей</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-4 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-gradient-green">
-                        <div class="inner">
-                            <h3>53</h3>
-
-                            <p>Выигранных дела</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-4 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-gradient-gray">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Новых клиентов</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                     <thead>
-                    @if(Auth::user()->role !== \App\Models\User::ROLE_ADMIN)
-                        <tr>
-                            <th>ID</th>
-                            <th>Клиент</th>
-                            <th>Роль</th>
-                            <th>Адвокат</th>
-                            <th>Суть дела</th>
-                            <th>Статья</th>
-                            <th>Стадия выполнения</th>
-                        </tr>
-                    @endif
+                    <tr>
+                        <th>Номер справи</th>
+                        <th>Адвокат</th>
+                        <th>Клієнт</th>
+                        <th>Суть справи</th>
+                        <th>Стаття</th>
+                        <th>Етап виконання</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>183</td>
-                        <td>Василий Пупкин</td>
-                        <td>Правонарушитель</td>
-                        <td>Василий Самойленко</td>
-                        <td>Краткое описание данного дела. Назначен суд на 13-10-2023</td>
-                        <td>130ст. КуПАП</td>
-                        <td><span class="tag tag-success">Назначен суд</span></td>
-                    </tr>
-                    Advocate
+                    @foreach($cases as $case)
+                        <tr>
+                            <td>{{ $case->case_number }}</td>
+                            <td>{{ $case->user->surname }} {{ $case->user->name }}</td>
+                            <td>{{ $case->visitor->surname }} {{ $case->visitor->name }}</td>
+                            <td>{{ $case->category->name }}</td>
+                            <td>{{ $case->article->name }}</td>
+                            <td>{{ $case->case_status_name }}</td>
+                            <td>
+                                @if($case->comment)
+                                    <a type="button"
+                                       class="ml-1"
+                                       data-bs-toggle="popover"
+                                       data-bs-placement="left"
+                                       data-bs-content="{{ $case?->comment }}"
+                                    >
+                                        <i class="fas fa-comment-alt text-info"></i>
+                                    </a>
+                                    <a class="ml-1" href="{{ route('cases.show', $case->id) }}" title="Детальніше">
+                                        <i class="far fa-list-alt text-primary"></i>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
 
                     </tbody>
+
                 </table>
             </div>
 

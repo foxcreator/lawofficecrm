@@ -16,8 +16,14 @@
                                 >
                             </div>
                             <h3 class="profile-username text-center">{{ $user->surname }} {{ $user->name }}</h3>
-                            <p class="text-muted text-center">{{ $user->role_name }}</p>
-                            @if($user->role != \App\Models\User::ROLE_ADMIN)
+                            <p class="text-muted text-center">
+                                @if($user->getRoleNames()->first())
+                                    {{ \App\Models\User::$roleMappings[$user->getRoleNames()->first()] }}
+                                @endif
+                            </p>
+
+                            @role('super-user')
+                            @if(!auth()->user()->hasRole('super-user'))
                                 @if($user->is_working == 1)
                                     <form action="{{ route('admin.employee.toggle-working', $user->id) }}"
                                           method="POST">
@@ -32,6 +38,7 @@
                                     </form>
                                 @endif
                             @endif
+                            @endrole
                             <a href="{{ route('admin.employee.edit', $user->id) }}" class="btn btn-outline-info btn-block mt-2" title="Редагувати">
                                 Редагувати
                             </a>

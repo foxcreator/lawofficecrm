@@ -9,6 +9,7 @@ use App\Models\Reception;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class ConsultationsController extends Controller
 {
@@ -18,8 +19,13 @@ class ConsultationsController extends Controller
     public function index()
     {
         $consultations = Consultation::orderBy('id', 'desc')->take(20)->paginate(20);
+        if (auth()->user()->role(User::ROLE_ADVOCATE)) {
+            $consultations = Consultation::where('user_id', auth()->id())->orderBy('id', 'desc')->take(20)->paginate(20);
+        }
         $visitors = Visitor::all();
-        $users = User::query()->where('role', User::ROLE_ADVOCATE)->get();
+        $advocateRole = Role::where('name', 'advocate')->first();
+
+        $users = $advocateRole->users;
         $categories = Category::all();
         $receptions = Reception::all();
         return view('consultation.index',
@@ -37,17 +43,22 @@ class ConsultationsController extends Controller
      */
     public function create()
     {
-        $visitors = Visitor::all();
-        $users = User::query()->where('role', User::ROLE_ADVOCATE)->get();
-        $categories = Category::all();
-        $receptions = Reception::all();
-        return view('consultation.create',
-            compact(
-                'visitors',
-                'users',
-                'categories',
-                'receptions',
-            ));
+        if (auth()->user()->can('consultation-create')) {
+            $visitors = Visitor::all();
+            $users = User::role('advocate')->get();
+            $categories = Category::all();
+            $receptions = Reception::all();
+            return view('consultation.create',
+                compact(
+                    'visitors',
+                    'users',
+                    'categories',
+                    'receptions',
+                ));
+        } else {
+            abort(403);
+        }
+
     }
 
     /**
@@ -55,10 +66,15 @@ class ConsultationsController extends Controller
      */
     public function store(CreateConsultationRequest $request)
     {
-        $consultation = Consultation::create($request->validated());
+        if (auth()->user()->can('consultation-create')) {
 
-        if ($consultation) {
-            return redirect()->back()->with('status', 'Запис про нову консультацію створено');
+            $consultation = Consultation::create($request->validated());
+
+            if ($consultation) {
+                return redirect()->back()->with('status', 'Запис про нову консультацію створено');
+            }
+        } else {
+            abort(403);
         }
     }
 
@@ -75,7 +91,7 @@ class ConsultationsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -83,7 +99,7 @@ class ConsultationsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -91,6 +107,6 @@ class ConsultationsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        abort(404);
     }
 }
