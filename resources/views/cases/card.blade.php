@@ -44,7 +44,7 @@
                         <a class="btn btn-xs btn-outline-info col-md-2" href="{{ route('cases.edit', $case->id) }}">Редагувати</a>
                         <button type="button"
                                 data-toggle="modal"
-                                data-target="#modal-add-comment"
+                                data-target="#modal-close-case"
                                 class="btn btn-xs btn-outline-danger col-md-3"
                                 >
                             Закрити справу
@@ -61,15 +61,11 @@
                             </div>
                         </div>
                     </div>
-{{--                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-add-comment">--}}
-{{--                        Launch Default Modal--}}
-{{--                    </button>--}}
                 </div>
             </div>
         </div>
-        <!-- /.card -->
     </div>
-    <div class="modal fade" id="modal-add-comment">
+    <div class="modal fade" id="modal-close-case">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header h-50 bg-gradient-light">

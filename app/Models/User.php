@@ -13,13 +13,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    const ROLE_ADMIN = 0;
-    const ROLE_MANAGER = 1;
-    const ROLE_ADVOCATE = 2;
-    const ROLE_GUEST = 3;
+    const ROLE_ADMIN = 1;
+    const ROLE_MANAGER = 2;
+    const ROLE_ADVOCATE = 3;
+    const ROLE_GUEST = 4;
 
     const GENDER_MAN = 1;
     const GENDER_WOMAN = 2;
+
+    static $roleMappings = [
+    'super-user' => 'Директор',
+    'manager' => 'Консультант',
+    'advocate' => 'Адвокат',
+    'guest' => 'Гість',
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -32,7 +39,6 @@ class User extends Authenticatable
         'surname',
         'birthdate',
         'phone',
-//        'role',
         'gender',
         'is_working',
     ];

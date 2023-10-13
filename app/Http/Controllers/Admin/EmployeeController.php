@@ -7,12 +7,13 @@ use App\Http\Requests\CreateEmployeeRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::query()->orderBy('is_working', 'desc')->get();
         return view('admin.employee.index', compact('users'));
     }
 
@@ -28,6 +29,7 @@ class EmployeeController extends Controller
         $data = $request->validated();
         unset($data['confirmPassword']);
         $user = User::create($data);
+        $user->assignRole($data['role']);
         if ($user) {
             return redirect()->route('dashboard')->with('status', 'Працівника додано!');
         } else {
@@ -55,6 +57,9 @@ class EmployeeController extends Controller
     public function employeeCard($id)
     {
         $user = User::find($id);
+        if (!auth()->user()->hasRole('super-user') && Auth::user()->id != $id) {
+            abort(403, 'Доступ заблоковано');
+        }
         $birthdate = $user->birthdate ? Carbon::createFromFormat('Y-m-d', $user->birthdate) : null;
         return view('admin.employee/card', compact('user', 'birthdate'));
     }
@@ -77,7 +82,11 @@ class EmployeeController extends Controller
             }
         }
         unset($updateData['_token']);
-        $user = User::query()->update($updateData);
+        $user = User::find($id);
+        $user->update($updateData);
+        if (isset($data['role'])) {
+            $user->syncRoles([$data['role']]);
+        }
         if ($user) {
             return redirect()->route('admin.employee.index')->with('status', 'Дані працівника успішно змінені!');
         }

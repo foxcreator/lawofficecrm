@@ -17,3 +17,36 @@
 .additional-fields {
     display: none;
 }
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table td {
+    max-width: 90px;
+    text-align: center;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    position: relative;
+}
+
+table th {
+    text-align: center;
+}
+
+.preloader {
+    background-color: #001355;
+    /*opacity: 0.9;*/
+    /*transition: none;*/
+}
+/*.cell-limit:hover {*/
+/*    max-width: none;*/
+/*    white-space: normal;*/
+/*    overflow: visible;*/
+/*    text-overflow: initial;*/
+/*    opacity: 1;*/
+/*}*/
