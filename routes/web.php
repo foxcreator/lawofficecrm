@@ -22,6 +22,7 @@ if (!\Illuminate\Support\Facades\Auth::user()) {
     Route::get('/login');
 }
 Auth::routes();
+Route::get('/test', [\App\Http\Controllers\HomeController::class, 'testing']);
 Route::get('/setting', [\App\Http\Controllers\SettingController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
