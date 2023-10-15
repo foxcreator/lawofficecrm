@@ -26,7 +26,7 @@ Route::get('/setting', [\App\Http\Controllers\SettingController::class, 'index']
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard')->middleware('can:dashboard');
-    Route::get('/search', [\App\Http\Controllers\HomeController::class, 'search'])
+    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])
         ->name('search');
     Route::get('/employee-all', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])
         ->name('admin.employee.index')->middleware('can:employee-all');
@@ -46,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/category/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])
         ->name('category.store')->middleware('can:category-add');
+    Route::post('/article/store', [\App\Http\Controllers\Admin\ArticleController::class, 'store'])
+        ->name('article.store')->middleware('can:category-add');
+
     Route::get('/visitors/all/{status}', [\App\Http\Controllers\Services\VisitorsController::class, 'index'])
         ->name('visitors.index')->middleware('can:visitors-all');
     Route::get('/visitors/create', [\App\Http\Controllers\Services\VisitorsController::class, 'create'])

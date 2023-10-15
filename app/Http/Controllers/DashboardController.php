@@ -19,9 +19,9 @@ class DashboardController extends Controller
         $newVisitorsThisMonth = Visitor::whereMonth('created_at', now()->month)->count();
 
         if (Auth::user()->hasRole(User::ROLE_ADMIN)) {
-            $cases = CourtCase::where('case_status', 0)->orderBy('id', 'desc')->take(8)->get();
+            $cases = CourtCase::where('case_status', 0)->orderBy('id', 'desc')->take(5)->get();
             $casesCount = CourtCase::where('case_status', 0)->count();
-            $consultations = Consultation::orderBy('id', 'desc')->take(8)->get();
+            $consultations = Consultation::orderBy('id', 'desc')->take(5)->get();
             $consultationsCount = Consultation::all()->count();
 
             return view('dashboards.admin', compact(

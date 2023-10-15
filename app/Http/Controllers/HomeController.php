@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\CourtCase;
+use App\Models\User;
 use App\Models\Visitor;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -32,58 +34,66 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         // ToDo Make a search from cases and view design maybe with tabs
-        $query = $request->input('search');
-        $visitorColumnsToSearch = [
-            'email',
-            'name',
-            'surname',
-            'father_name',
-            'birthdate',
-            'tin_code',
-            'passport_number',
-            'address',
-            'phone',
-            'phone',
-        ];
+        $searchTerm = $request->input('search');
+        $searchTerms = explode(' ', $searchTerm);
 
-        $consultationsColumnsToSearch = [
-            'consultation_date',
-            'comment',
-            'user_id',
-            'category_id',
-            'visitor_id',
-            'reception_id',
-        ];
 
-        $visitors = Visitor::where(function($queryBuilder) use ($visitorColumnsToSearch, $query) {
-            foreach ($visitorColumnsToSearch as $column) {
-                $queryBuilder->orWhere($column, 'like', "%$query%");
+//        $cases = CourtCase::where('case_number', 'like', "%$searchTerm%")
+//        ->orWhere('case_production_number', 'like', "%$searchTerm%")
+//        ->orWhere('comment', 'like', "%$searchTerm%")
+//        ->orWhereHas('visitor', function ($query) use ($searchTerm) {
+//            $query->where('name', 'like', "%$searchTerm%");
+//        })->orWhereHas('user', function ($query) use ($searchTerm) {
+//            $query->where('name', 'like', "%$searchTerm%");
+//        })->orWhereHas('article', function ($query) use ($searchTerm) {
+//            $query->where('name', 'like', "%$searchTerm%");
+//        })->orWhereHas('category', function ($query) use ($searchTerm) {
+//            $query->where('name', 'like', "%$searchTerm%");
+//        })->paginate(10);
+
+        $consultations = Consultation::where('consultation_date', 'like', "%$searchTerm%")
+            ->orWhere('comment', 'like', "%$searchTerm%")
+            ->orWhereHas('visitor', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })->orWhereHas('user', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })->orWhereHas('reception', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })->orWhereHas('category', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })->paginate(10);
+
+        $visitors = Visitor::where(function ($query) use ($searchTerms) {
+            foreach ($searchTerms as $searchTerm) {
+                $query->where('email', 'like', "%$searchTerm%")
+                    ->orWhere('name', 'like', "%$searchTerm%")
+                    ->orWhere('surname', 'like', "%$searchTerm%")
+                    ->orWhere('tin_code', 'like', "%$searchTerm%")
+                    ->orWhere('phone', 'like', "%$searchTerm%");
             }
-        })->get();
+        })->paginate(10);
 
-        $consultations = Consultation::where(function($queryBuilder) use ($consultationsColumnsToSearch, $query) {
-            foreach ($consultationsColumnsToSearch as $column) {
-                $queryBuilder->orWhere($column, 'like', "%$query%");
+
+
+        $users = User::where(function ($query) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                $query->where('name', 'like', "%$term%")
+                    ->orWhere('surname', 'like', "%$term%")
+                    ->orWhere('email', 'like', "%$term%")
+                    ->orWhere('phone', 'like', "%$term%");
             }
-        })->get();
-
-//        $results = Visitor::where(function($query) use ($visitorColumnsToSearch, $searchTerm) {
-//            foreach ($visitorColumnsToSearch as $column) {
-//                $query->orWhere($column, 'like', "%$searchTerm%");
-//            }
-//        })->orWhereHas('consultations', function($query) use ($consultationsColumnsToSearch, $searchTerm) {
-//            $query->where(function($queryBuilder) use ($consultationsColumnsToSearch, $searchTerm) {
-//                foreach ($consultationsColumnsToSearch as $column) {
-//                    $queryBuilder->orWhere($column, 'like', "%$searchTerm");
-//                }
-//            });
-//        })->get();
+        })->paginate(10);
 
 
 
+//dd($cases);
 
-
-        return view('search.searchResult', compact('consultations', 'visitors'));
+        return view('search.searchResult', compact(
+            'consultations',
+            'visitors',
+            'cases',
+            'users'
+        ));
     }
 
     public function contractAction(Request $request, $client)
