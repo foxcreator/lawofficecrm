@@ -93,7 +93,7 @@
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
                 </a>
-                <div class="navbar-search-block">
+                <div class="navbar-search-block w-50" data-search-block>
                     <form class="form-inline" action="{{ route('search') }}" method="GET">
                         <div class="input-group input-group-sm">
                             <input class="form-control" type="search" name="search" placeholder="Пошук..."
@@ -116,7 +116,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-blue-my">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-custom-blue">
         <!-- Brand Logo -->
         <a href="{{ route('dashboard') }}" class="brand-link align-items-center text-decoration-none">
             <img src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 mt-2 mr-4"
@@ -290,6 +290,9 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Подключаем jQuery (если еще не подключено) -->
+
 
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

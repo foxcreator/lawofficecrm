@@ -1,4 +1,4 @@
-.bg-blue-my {
+.bg-custom-blue {
     background-color: #001355;
 }
 
@@ -40,13 +40,10 @@ table th {
 
 .preloader {
     background-color: #001355;
-    /*opacity: 0.9;*/
-    /*transition: none;*/
 }
-/*.cell-limit:hover {*/
-/*    max-width: none;*/
-/*    white-space: normal;*/
-/*    overflow: visible;*/
-/*    text-overflow: initial;*/
-/*    opacity: 1;*/
-/*}*/
+
+.nav-pills .nav-item .nav-link.active {
+    background-color: #117a8b;!important;
+    opacity: 0.9;
+    color: #FFFFFF;
+}
