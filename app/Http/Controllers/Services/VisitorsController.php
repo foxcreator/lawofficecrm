@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Services;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateVisitorRequest;
 use App\Http\Requests\UpdateVisitorRequest;
+use App\Models\Consultation;
+use App\Models\CourtCase;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use function Termwind\render;
@@ -57,6 +59,12 @@ class VisitorsController extends Controller
     public function visitorCard($id)
     {
         $visitor = Visitor::find($id);
-        return view('visitors.card', compact('visitor'));
+        $cases = CourtCase::query()->where('visitor_id', $id)->paginate(10);
+        $consultations = Consultation::query()->where('visitor_id', $id)->paginate(10);
+        return view('visitors.card', compact(
+            'visitor',
+            'cases',
+            'consultations'
+        ));
     }
 }

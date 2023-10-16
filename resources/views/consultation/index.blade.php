@@ -22,9 +22,9 @@
                         @foreach($consultations as $consultation)
                             <tr>
                                 <td>{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
-                                <td>{{ $consultation->visitor->birthdate }}</td>
+                                <td>{{ \Carbon\Carbon::create($consultation->visitor->birthdate)->format('d.m.Y') }}</td>
                                 <td>{{ $consultation->reception->city }}-{{ $consultation->reception->number }}</td>
-                                <td>{{ $consultation->consultation_date }}</td>
+                                <td>{{ \Carbon\Carbon::create($consultation->consultation_date)->format('d.m.Y') }}</td>
                                 <td>{{ $consultation->user->surname }} {{ $consultation->user->name }}</td>
                                 <td>{{ $consultation->category->name }} </td>
                                 <td>

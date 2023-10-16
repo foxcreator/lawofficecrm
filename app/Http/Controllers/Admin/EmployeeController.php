@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateEmployeeRequest;
+use App\Models\Consultation;
+use App\Models\CourtCase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -60,8 +62,15 @@ class EmployeeController extends Controller
         if (!auth()->user()->hasRole('super-user') && Auth::user()->id != $id) {
             abort(403, 'Доступ заблоковано');
         }
+        $consultations = Consultation::query()->where('user_id', $id)->paginate(10);
+        $cases = CourtCase::query()->where('user_id', $id)->paginate(10);
         $birthdate = $user->birthdate ? Carbon::createFromFormat('Y-m-d', $user->birthdate) : null;
-        return view('admin.employee/card', compact('user', 'birthdate'));
+        return view('admin.employee/card', compact(
+            'user',
+            'birthdate',
+            'consultations',
+            'cases'
+        ));
     }
 
     public function edit($id)
