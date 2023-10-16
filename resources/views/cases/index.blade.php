@@ -11,12 +11,12 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
-                            <th>Номер справи</th>
-                            <th>Адвокат</th>
-                            <th>Клієнт</th>
-                            <th>Суть справи</th>
-                            <th>Стаття</th>
-                            <th>Етап виконання</th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'case_number', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Номер справи</a></th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'user_id', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Адвокат</a></th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'visitor_id', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Клієнт</a></th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'category_id', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Суть справи</a></th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'article_id', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Стаття</a></th>
+                            <th><a href="{{ route('cases.index.status', ['caseStatus' => $caseStatus, 'sort_by' => 'status', 'sort_order' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Етап виконання</a></th>
                         </tr>
                         </thead>
                         <tbody>

@@ -25,7 +25,7 @@
                                 <b>Телефон</b> <a class="float-right">{{ $visitor->phone }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Дата консультації</b> <a class="float-right">09.03.2023</a>
+                                <b>Дата народження</b> <a class="float-right">{{ \Carbon\Carbon::create($visitor->birthdate)->format('d m Y') }}</a>
                             </li>
                             @if($visitor->visitor_status)
                             <li class="list-group-item">
@@ -38,7 +38,7 @@
                                 <b>Виданий</b> <a class="float-right">{{ $visitor->passport_issued_by }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Дата видачи</b> <a class="float-right">{{ $visitor->passport_when_issued }}</a>
+                                <b>Дата видачи</b> <a class="float-right">{{ \Carbon\Carbon::create($visitor->passport_when_issued)->format('d m Y') }}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Адреса</b> <a class="float-right">{{ $visitor->address }}</a>

@@ -20,7 +20,7 @@
                         @foreach($visitors as $visitor)
                             <tr>
                                 <td>{{ $visitor->surname }} {{ $visitor->name }}</td>
-                                <td>{{ $visitor->birthdate }}</td>
+                                <td>{{ \Carbon\Carbon::create($visitor->birthdate)->format('d m Y') }}</td>
                                 <td>{{ $visitor->tin_code }}</td>
                                 <td>{{ $visitor->phone }}</td>
                                 <td>

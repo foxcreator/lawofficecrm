@@ -24,7 +24,7 @@
                                 <td>{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
                                 <td>{{ $consultation->visitor->birthdate }}</td>
                                 <td>{{ $consultation->reception->city }}-{{ $consultation->reception->number }}</td>
-                                <td>{{ $consultation->consultation_date }}</td>
+                                <td>{{ \Carbon\Carbon::create($consultation->consultation_date)->translatedFormat('d m Y') }}</td>
                                 <td>{{ $consultation->user->surname }} {{ $consultation->user->name }}</td>
                                 <td>{{ $consultation->category->name }} </td>
                                 <td>

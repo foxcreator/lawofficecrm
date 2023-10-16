@@ -17,24 +17,41 @@ class CasesController extends Controller
         return abort(404);
     }
 
-    public function indexStatus($caseStatus)
+    public function indexStatus(Request $request, $caseStatus)
     {
+
+        $query = CourtCase::query();
+
+        if ($request->has('sort_by')) {
+            $sortBy = $request->input('sort_by');
+            $sortOrder = $request->input('sort_order', 'asc');
+            $query->orderBy($sortBy, $sortOrder);
+        } else {
+            $sortBy = 'case_number';
+            $sortOrder = 'desc';
+            $query->orderBy($sortBy, $sortOrder);
+        }
+
         if (auth()->user()->hasRole(User::ROLE_ADVOCATE)) {
             $advocateId = auth()->id();
             if ($caseStatus == 0) {
-                $cases = CourtCase::where('case_status', 0)->where('id', $advocateId)->paginate(20);
+                $query = $query->where('case_status', 0)->where('id', $advocateId);
             } else {
-                $cases = CourtCase::query()->whereNot('case_status', 0)->where('id', $advocateId)->paginate(20);
+                $query = $query->where('id', $advocateId)->where('case_status', '!=', 0);
             }
-            return view('cases.index', compact('cases'));
-        }
-        if ($caseStatus == 0) {
-            $cases = CourtCase::where('case_status', 0)->paginate(20);
         } else {
-            $cases = CourtCase::query()->whereNot('case_status', 0)->paginate(20);
+            if ($caseStatus == 0) {
+                $query->where('case_status', 0);
+            } else {
+                $query->where('case_status', '!=', 0);
+            }
         }
-        return view('cases.index', compact('cases'));
+
+        $cases = $query->paginate(20);
+
+        return view('cases.index', compact('cases', 'sortBy', 'sortOrder', 'caseStatus'));
     }
+
 
     public function create()
     {
