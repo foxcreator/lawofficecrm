@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-article-create" data-backdrop="static">
+<div class="modal fade" id="modal-article-create">
     <div class="modal-dialog">
         <form id="article-form" class="modal-content" action="{{ route('article.store') }}" method="POST">
 
@@ -14,15 +14,13 @@
                     <label for="article_name">Введить назву статті</label>
                     <input type="text" class="form-control form-control-border" id="article_name" name="name"
                            placeholder="Назва статті" value="{{ old('name') }}" maxlength="25">
-{{--                    @error('name')--}}
                     <span class="invalid-feedback" ></span>
-{{--                    @enderror--}}
                 </div>
 
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Відміна</button>
-                <button type="button" id="submit-button" class="btn btn-primary">Зберегти</button>
+                <button type="submit" id="submit-button" class="btn btn-primary">Зберегти</button>
             </div>
         </form>
     </div>
@@ -30,17 +28,21 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        console.log('Document is ready.');
-        $('#submit-button').click(function () {
-            console.log('Submit button clicked.');
+    $(document).ready(function() {
+        $('#article-form').submit(function(event) {
+            event.preventDefault();
+            console.log('asd')
             $.ajax({
                 type: 'POST',
-                url: $('#article-form').attr('action'),
-                data: $('#article-form').serialize(),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
                 success: function (response) {
+                    console.log('asd')
+                    console.log(response.success)
+
                     if (response.success) {
-                        $('#modal-article-create').modal('hide');
+                        console.log(response.success)
+                        setTimeout(() => $("#modal-article-create [data-dismiss=modal]").trigger({ type: "click" }), 200)
                         $('#article_name').val('');
                         $('#article_name-error').empty();
                         $('#article_name').removeClass('is-invalid');
@@ -49,7 +51,7 @@
                     }
                 },
                 error: function (response) {
-                    console.log(response.responseJSON.errors['name'])
+                    console.log('asd')
 
                     if (response.responseJSON && response.responseJSON.errors) {
                         var errors = response.responseJSON.errors;
@@ -58,47 +60,10 @@
                             $('#article_' + key).siblings('.invalid-feedback').text(response.responseJSON.errors[key]);
                         }
                     }
-                                }
+                }
             });
-        });
+        })
     });
-    // $(document).ready(function () {
-    //     $('#article-form').submit(function (event) {
-    //         event.preventDefault();
-    //
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: $(this).attr('action'),
-    //             data: $(this).serialize(),
-    //             success: function (response) {
-    //                 if (response.success) {
-    //                     $('#modal-article-create').modal('hide');
-    //                     $('#name').val('');
-    //                     $('#name-error').empty();
-    //                     $('#name').removeClass('is-invalid');
-    //
-    //                     toastr.success(response.success);
-    //                 } else if (response.errors) {
-    //                     // Показать ошибки валидации
-    //                     for (var key in response.errors) {
-    //                         $('#' + key).addClass('is-invalid');
-    //                         $('#' + key + '-error').text(response.errors[key]);
-    //                     }
-    //                 }
-    //             },
-    //             error: function (response) {
-    //                 if (response.responseJSON && response.responseJSON.errors) {
-    //                     var errors = response.responseJSON.errors;
-    //                     for (var key in errors) {
-    //                         $('#' + key).addClass('is-invalid');
-    //                         $('#' + key + '-error').text(errors[key]);
-    //                     }
-    //                 }
-    //             }
-    //         });
-    //     });
-    // });
-
 </script>
 
 

@@ -19,13 +19,14 @@ class ArticleController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $category = Article::create($request->validated());
+        $article = Article::create($request->validated());
 
-        if ($category) {
+        if ($article) {
             return response()->json(['success' => 'Стаття успішно додана']);
         } else {
             return response()->json(['error' => 'Smth is wrong'], 500);
         }
+
     }
 }
 
