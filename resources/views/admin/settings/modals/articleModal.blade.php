@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-article-create" data-backdrop="static">
     <div class="modal-dialog">
-        <form id="category-form" class="modal-content" action="{{ route('article.store') }}" method="POST">
+        <form id="article-form" class="modal-content" action="{{ route('article.store') }}" method="POST">
 
             <div class="modal-header bg-custom-yellow">
                 <h5 class="modal-title">Додати статтю</h5>
@@ -11,16 +11,18 @@
             <div class="modal-body">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Введить назву статті</label>
-                    <input type="text" class="form-control form-control-border" id="name" name="name"
+                    <label for="article_name">Введить назву статті</label>
+                    <input type="text" class="form-control form-control-border" id="article_name" name="name"
                            placeholder="Назва статті" value="{{ old('name') }}" maxlength="25">
-                    <span class="invalid-feedback" id="name-error"></span>
+{{--                    @error('name')--}}
+                    <span class="invalid-feedback" ></span>
+{{--                    @enderror--}}
                 </div>
 
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Відміна</button>
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="button" id="submit-button" class="btn btn-primary">Зберегти</button>
             </div>
         </form>
     </div>
@@ -29,36 +31,77 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#category-form').submit(function (event) {
-            event.preventDefault();
-
+        console.log('Document is ready.');
+        $('#submit-button').click(function () {
+            console.log('Submit button clicked.');
             $.ajax({
                 type: 'POST',
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
+                url: $('#article-form').attr('action'),
+                data: $('#article-form').serialize(),
                 success: function (response) {
                     if (response.success) {
                         $('#modal-article-create').modal('hide');
-                        $('#name').val('');
-                        $('#name-error').empty();
-                        $('#name').removeClass('is-invalid');
+                        $('#article_name').val('');
+                        $('#article_name-error').empty();
+                        $('#article_name').removeClass('is-invalid');
 
                         toastr.success(response.success);
                     }
                 },
                 error: function (response) {
+                    console.log(response.responseJSON.errors['name'])
+
                     if (response.responseJSON && response.responseJSON.errors) {
                         var errors = response.responseJSON.errors;
                         for (var key in errors) {
-                            $('#' + key).addClass('is-invalid');
-                            $('#' + key + '-error').html(errors[key]);
+                            $('#article_' + key).addClass('is-invalid');
+                            $('#article_' + key).siblings('.invalid-feedback').text(response.responseJSON.errors[key]);
                         }
                     }
-                }
+                                }
             });
         });
     });
+    // $(document).ready(function () {
+    //     $('#article-form').submit(function (event) {
+    //         event.preventDefault();
+    //
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: $(this).attr('action'),
+    //             data: $(this).serialize(),
+    //             success: function (response) {
+    //                 if (response.success) {
+    //                     $('#modal-article-create').modal('hide');
+    //                     $('#name').val('');
+    //                     $('#name-error').empty();
+    //                     $('#name').removeClass('is-invalid');
+    //
+    //                     toastr.success(response.success);
+    //                 } else if (response.errors) {
+    //                     // Показать ошибки валидации
+    //                     for (var key in response.errors) {
+    //                         $('#' + key).addClass('is-invalid');
+    //                         $('#' + key + '-error').text(response.errors[key]);
+    //                     }
+    //                 }
+    //             },
+    //             error: function (response) {
+    //                 if (response.responseJSON && response.responseJSON.errors) {
+    //                     var errors = response.responseJSON.errors;
+    //                     for (var key in errors) {
+    //                         $('#' + key).addClass('is-invalid');
+    //                         $('#' + key + '-error').text(errors[key]);
+    //                     }
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+
 </script>
+
+
 
 
 

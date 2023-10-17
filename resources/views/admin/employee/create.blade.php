@@ -12,7 +12,7 @@
                             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                                    name="email" value="{{ old('email') }}" placeholder="Email">
                             @error('email')
-                            <span class="invalid-feedback">
+                                <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
