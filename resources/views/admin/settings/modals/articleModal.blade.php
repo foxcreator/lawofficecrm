@@ -1,6 +1,6 @@
-<div class="modal fade" id="modal-article-create" data-backdrop="static">
+<div class="modal fade" id="modal-article-create">
     <div class="modal-dialog">
-        <form id="category-form" class="modal-content" action="{{ route('article.store') }}" method="POST">
+        <form id="article-form" class="modal-content" action="{{ route('article.store') }}" method="POST">
 
             <div class="modal-header bg-custom-yellow">
                 <h5 class="modal-title">Додати статтю</h5>
@@ -11,16 +11,16 @@
             <div class="modal-body">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Введить назву статті</label>
-                    <input type="text" class="form-control form-control-border" id="name" name="name"
+                    <label for="article_name">Введить назву статті</label>
+                    <input type="text" class="form-control form-control-border" id="article_name" name="name"
                            placeholder="Назва статті" value="{{ old('name') }}" maxlength="25">
-                    <span class="invalid-feedback" id="name-error"></span>
+                    <span class="invalid-feedback" ></span>
                 </div>
 
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Відміна</button>
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="submit" id="submit-button" class="btn btn-primary">Зберегти</button>
             </div>
         </form>
     </div>
@@ -28,37 +28,45 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#category-form').submit(function (event) {
+    $(document).ready(function() {
+        $('#article-form').submit(function(event) {
             event.preventDefault();
-
+            console.log('asd')
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 success: function (response) {
+                    console.log('asd')
+                    console.log(response.success)
+
                     if (response.success) {
-                        $('#modal-article-create').modal('hide');
-                        $('#name').val('');
-                        $('#name-error').empty();
-                        $('#name').removeClass('is-invalid');
+                        console.log(response.success)
+                        setTimeout(() => $("#modal-article-create [data-dismiss=modal]").trigger({ type: "click" }), 200)
+                        $('#article_name').val('');
+                        $('#article_name-error').empty();
+                        $('#article_name').removeClass('is-invalid');
 
                         toastr.success(response.success);
                     }
                 },
                 error: function (response) {
+                    console.log('asd')
+
                     if (response.responseJSON && response.responseJSON.errors) {
                         var errors = response.responseJSON.errors;
                         for (var key in errors) {
-                            $('#' + key).addClass('is-invalid');
-                            $('#' + key + '-error').html(errors[key]);
+                            $('#article_' + key).addClass('is-invalid');
+                            $('#article_' + key).siblings('.invalid-feedback').text(response.responseJSON.errors[key]);
                         }
                     }
                 }
             });
-        });
+        })
     });
 </script>
+
+
 
 
 

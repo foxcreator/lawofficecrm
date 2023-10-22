@@ -39,7 +39,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#modal-category-create').modal('hide');
+                        setTimeout(() => $("#modal-category-create [data-dismiss=modal]").trigger({ type: "click" }), 200)
                         $('#name').val('');
                         $('#name-error').empty();
                         $('#name').removeClass('is-invalid');
