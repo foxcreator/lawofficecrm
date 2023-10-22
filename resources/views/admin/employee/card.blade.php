@@ -45,7 +45,9 @@
                         </div>
                     </div>
                 </div>
+                @role('super-user')
                     @include('admin.settings.tabs')
+                @endrole
             </div>
         </div>
     </section>

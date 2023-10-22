@@ -2,7 +2,6 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <!-- Main row -->
             <div class="card-body table-responsive p-0">
                 <a href="{{ route('cases.create') }}" class="btn btn-block btn-outline-dark btn-sm w-25">Відкрити
                     справу</a>
