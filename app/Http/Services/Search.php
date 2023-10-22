@@ -15,9 +15,11 @@ class Search
             ->orWhere('case_production_number', 'like', "%$searchTerm%")
             ->orWhere('comment', 'like', "%$searchTerm%")
             ->orWhereHas('visitor', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
+                $query->where('name', 'like', "%$searchTerm%")
+                    ->orWhere('surname', 'like', "%$searchTerm%");
             })->orWhereHas('user', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
+                $query->where('name', 'like', "%$searchTerm%")
+                    ->orWhere('surname', 'like', "%$searchTerm%");
             })->orWhereHas('article', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
@@ -32,9 +34,11 @@ class Search
         $consultations = Consultation::where('consultation_date', 'like', "%$searchTerm%")
             ->orWhere('comment', 'like', "%$searchTerm%")
             ->orWhereHas('visitor', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
+                $query->where('name', 'like', "%$searchTerm%")
+                    ->orWhere('surname', 'like', "%$searchTerm%");
             })->orWhereHas('user', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
+                $query->where('name', 'like', "%$searchTerm%")
+                    ->orWhere('surname', 'like', "%$searchTerm%");
             })->orWhereHas('reception', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
