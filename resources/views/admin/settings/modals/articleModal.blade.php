@@ -31,15 +31,11 @@
     $(document).ready(function() {
         $('#article-form').submit(function(event) {
             event.preventDefault();
-            console.log('asd')
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 success: function (response) {
-                    console.log('asd')
-                    console.log(response.success)
-
                     if (response.success) {
                         console.log(response.success)
                         setTimeout(() => $("#modal-article-create [data-dismiss=modal]").trigger({ type: "click" }), 200)
@@ -51,8 +47,6 @@
                     }
                 },
                 error: function (response) {
-                    console.log('asd')
-
                     if (response.responseJSON && response.responseJSON.errors) {
                         var errors = response.responseJSON.errors;
                         for (var key in errors) {
