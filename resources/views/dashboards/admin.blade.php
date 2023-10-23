@@ -16,7 +16,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('consultations.index') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('consultations.index') }}" class="small-box-footer">Більше інформації <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('cases.index', 1) }}" class="small-box-footer">More info <i
+                        <a href="{{ route('cases.index', 1) }}" class="small-box-footer"> Більше інформації <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{ route('visitors.index', 0) }}" class="small-box-footer">More info <i
+                        <a href="{{ route('visitors.index', 0) }}" class="small-box-footer">Більше інформації <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

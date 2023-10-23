@@ -50,7 +50,7 @@ class VisitorsController extends Controller
 
         $visitor = Visitor::create($updateVisitorData);
         if ($visitor) {
-            return redirect()->route('visitors', $visitor->visitor_status)->with('status', "{$visitor->name} був успішно змінен");
+            return redirect()->route('visitors.index', $visitor->visitor_status)->with('status', "{$visitor->name} був успішно змінен");
         }
 
         return redirect()->back()->with('error', 'Smth is wrong');

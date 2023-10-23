@@ -38,6 +38,8 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile row d-flex justify-content-between">
+                        <button type="button" class="btn btn-dark btn-xs col-sm-3">Створити договір</button>
+
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
                         </a>

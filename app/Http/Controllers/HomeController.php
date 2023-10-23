@@ -33,7 +33,7 @@ class HomeController extends Controller
 // ToDo Make Sorting data in all tables
     public function search(Request $request)
     {
-        // ToDo Make a search from cases and view design maybe with tabs
+        // ToDo Make a search from cases and view design maybe with top-tabs
         $searchTerm = $request->input('search');
         $searchTerms = explode(' ', $searchTerm);
 

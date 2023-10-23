@@ -1,11 +1,11 @@
 /*! jQuery UI - v1.13.0 - 2021-10-07
 * http://jqueryui.com
-* Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
+* Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/top-tabs.js, widgets/tooltip.js
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 
 ( function( factory ) {
 	"use strict";
-	
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -17649,7 +17649,7 @@ var widgetsSpinner = $.ui.spinner;
 //>>docs: http://api.jqueryui.com/tabs/
 //>>demos: http://jqueryui.com/tabs/
 //>>css.structure: ../../themes/base/core.css
-//>>css.structure: ../../themes/base/tabs.css
+//>>css.structure: ../../themes/base/top-tabs.css
 //>>css.theme: ../../themes/base/theme.css
 
 
@@ -17705,12 +17705,12 @@ $.widget( "ui.tabs", {
 		this.running = false;
 
 		this._addClass( "ui-tabs", "ui-widget ui-widget-content" );
-		this._toggleClass( "ui-tabs-collapsible", null, options.collapsible );
+		this._toggleClass( "ui-top-tabs-collapsible", null, options.collapsible );
 
 		this._processTabs();
 		options.active = this._initialActive();
 
-		// Take disabling tabs via class attribute from HTML
+		// Take disabling top-tabs via class attribute from HTML
 		// into account and update option properly.
 		if ( Array.isArray( options.disabled ) ) {
 			options.disabled = $.uniqueSort( options.disabled.concat(
@@ -17753,7 +17753,7 @@ $.widget( "ui.tabs", {
 
 			// Check for a tab marked active via a class
 			if ( active === null ) {
-				active = this.tabs.index( this.tabs.filter( ".ui-tabs-active" ) );
+				active = this.tabs.index( this.tabs.filter( ".ui-top-tabs-active" ) );
 			}
 
 			// No active tab, set to false
@@ -17911,7 +17911,7 @@ $.widget( "ui.tabs", {
 		this._super( key, value );
 
 		if ( key === "collapsible" ) {
-			this._toggleClass( "ui-tabs-collapsible", null, value );
+			this._toggleClass( "ui-top-tabs-collapsible", null, value );
 
 			// Setting collapsible: false while collapsed; open first panel
 			if ( !value && this.options.active === false ) {
@@ -17936,7 +17936,7 @@ $.widget( "ui.tabs", {
 		var options = this.options,
 			lis = this.tablist.children( ":has(a[href])" );
 
-		// Get disabled tabs from class attribute from HTML
+		// Get disabled top-tabs from class attribute from HTML
 		// this will get converted to a boolean if needed in _refresh()
 		options.disabled = $.map( lis.filter( ".ui-state-disabled" ), function( tab ) {
 			return lis.index( tab );
@@ -17944,7 +17944,7 @@ $.widget( "ui.tabs", {
 
 		this._processTabs();
 
-		// Was collapsed or no tabs
+		// Was collapsed or no top-tabs
 		if ( options.active === false || !this.anchors.length ) {
 			options.active = false;
 			this.active = $();
@@ -17952,7 +17952,7 @@ $.widget( "ui.tabs", {
 		// was active, but active tab is gone
 		} else if ( this.active.length && !$.contains( this.tablist[ 0 ], this.active[ 0 ] ) ) {
 
-			// all remaining tabs are disabled
+			// all remaining top-tabs are disabled
 			if ( this.tabs.length === options.disabled.length ) {
 				options.active = false;
 				this.active = $();
@@ -18017,7 +18017,7 @@ $.widget( "ui.tabs", {
 		this._addClass( this.tablist, "ui-tabs-nav",
 			"ui-helper-reset ui-helper-clearfix ui-widget-header" );
 
-		// Prevent users from focusing disabled tabs via click
+		// Prevent users from focusing disabled top-tabs via click
 		this.tablist
 			.on( "mousedown" + this.eventNamespace, "> li", function( event ) {
 				if ( $( this ).is( ".ui-state-disabled" ) ) {
@@ -18031,7 +18031,7 @@ $.widget( "ui.tabs", {
 			// We don't have to worry about focusing the previously focused
 			// element since clicking on a non-focusable element should focus
 			// the body anyway.
-			.on( "focus" + this.eventNamespace, ".ui-tabs-anchor", function() {
+			.on( "focus" + this.eventNamespace, ".ui-top-tabs-anchor", function() {
 				if ( $( this ).closest( "li" ).is( ".ui-state-disabled" ) ) {
 					this.blur();
 				}
@@ -18050,7 +18050,7 @@ $.widget( "ui.tabs", {
 			.attr( {
 				tabIndex: -1
 			} );
-		this._addClass( this.anchors, "ui-tabs-anchor" );
+		this._addClass( this.anchors, "ui-top-tabs-anchor" );
 
 		this.panels = $();
 
@@ -18085,7 +18085,7 @@ $.widget( "ui.tabs", {
 				that.panels = that.panels.add( panel );
 			}
 			if ( originalAriaControls ) {
-				tab.data( "ui-tabs-aria-controls", originalAriaControls );
+				tab.data( "ui-top-tabs-aria-controls", originalAriaControls );
 			}
 			tab.attr( {
 				"aria-controls": panelId,
@@ -18113,7 +18113,7 @@ $.widget( "ui.tabs", {
 	_createPanel: function( id ) {
 		return $( "<div>" )
 			.attr( "id", id )
-			.data( "ui-tabs-destroy", true );
+			.data( "ui-top-tabs-destroy", true );
 	},
 
 	_setOptionDisabled: function( disabled ) {
@@ -18127,7 +18127,7 @@ $.widget( "ui.tabs", {
 			}
 		}
 
-		// Disable tabs
+		// Disable top-tabs
 		for ( i = 0; ( li = this.tabs[ i ] ); i++ ) {
 			currentItem = $( li );
 			if ( disabled === true || $.inArray( i, disabled ) !== -1 ) {
@@ -18225,7 +18225,7 @@ $.widget( "ui.tabs", {
 		if ( tab.hasClass( "ui-state-disabled" ) ||
 
 				// tab is already loading
-				tab.hasClass( "ui-tabs-loading" ) ||
+				tab.hasClass( "ui-top-tabs-loading" ) ||
 
 				// can't switch durning an animation
 				this.running ||
@@ -18255,7 +18255,7 @@ $.widget( "ui.tabs", {
 		this._toggle( event, eventData );
 	},
 
-	// Handles show/hide for selecting tabs
+	// Handles show/hide for selecting top-tabs
 	_toggle: function( event, eventData ) {
 		var that = this,
 			toShow = eventData.newPanel,
@@ -18299,7 +18299,7 @@ $.widget( "ui.tabs", {
 			"aria-expanded": "false"
 		} );
 
-		// If we're switching tabs, remove the old tab from the tab order.
+		// If we're switching top-tabs, remove the old tab from the tab order.
 		// If we're opening from collapsed state, remove the previous tab from the tab order.
 		// If we're collapsing, then keep the collapsing tab in the tab order.
 		if ( toShow.length && toHide.length ) {
@@ -18333,7 +18333,7 @@ $.widget( "ui.tabs", {
 			active = this.active;
 		}
 
-		anchor = active.find( ".ui-tabs-anchor" )[ 0 ];
+		anchor = active.find( ".ui-top-tabs-anchor" )[ 0 ];
 		this._eventHandler( {
 			target: anchor,
 			currentTarget: anchor,
@@ -18370,7 +18370,7 @@ $.widget( "ui.tabs", {
 			.removeUniqueId();
 
 		this.tabs.add( this.panels ).each( function() {
-			if ( $.data( this, "ui-tabs-destroy" ) ) {
+			if ( $.data( this, "ui-top-tabs-destroy" ) ) {
 				$( this ).remove();
 			} else {
 				$( this ).removeAttr( "role tabIndex " +
@@ -18380,11 +18380,11 @@ $.widget( "ui.tabs", {
 
 		this.tabs.each( function() {
 			var li = $( this ),
-				prev = li.data( "ui-tabs-aria-controls" );
+				prev = li.data( "ui-top-tabs-aria-controls" );
 			if ( prev ) {
 				li
 					.attr( "aria-controls", prev )
-					.removeData( "ui-tabs-aria-controls" );
+					.removeData( "ui-top-tabs-aria-controls" );
 			} else {
 				li.removeAttr( "aria-controls" );
 			}
@@ -18446,7 +18446,7 @@ $.widget( "ui.tabs", {
 		index = this._getIndex( index );
 		var that = this,
 			tab = this.tabs.eq( index ),
-			anchor = tab.find( ".ui-tabs-anchor" ),
+			anchor = tab.find( ".ui-top-tabs-anchor" ),
 			panel = this._getPanelForTab( tab ),
 			eventData = {
 				tab: tab,
@@ -18457,7 +18457,7 @@ $.widget( "ui.tabs", {
 					that.panels.stop( false, true );
 				}
 
-				that._removeClass( tab, "ui-tabs-loading" );
+				that._removeClass( tab, "ui-top-tabs-loading" );
 				panel.removeAttr( "aria-busy" );
 
 				if ( jqXHR === that.xhr ) {
@@ -18476,7 +18476,7 @@ $.widget( "ui.tabs", {
 		// jQuery <1.8 returns false if the request is canceled in beforeSend,
 		// but as of 1.8, $.ajax() always returns a jqXHR object.
 		if ( this.xhr && this.xhr.statusText !== "canceled" ) {
-			this._addClass( tab, "ui-tabs-loading" );
+			this._addClass( tab, "ui-top-tabs-loading" );
 			panel.attr( "aria-busy", "true" );
 
 			this.xhr
@@ -18526,7 +18526,7 @@ $.widget( "ui.tabs", {
 // TODO: Switch return back to widget declaration at top of file when this is removed
 if ( $.uiBackCompat !== false ) {
 
-	// Backcompat for ui-tab class (now ui-tabs-tab)
+	// Backcompat for ui-tab class (now ui-top-tabs-tab)
 	$.widget( "ui.tabs", $.ui.tabs, {
 		_processTabs: function() {
 			this._superApply( arguments );

@@ -60,8 +60,8 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                @include('admin.employee.tabs.consultations')
-                                @include('admin.employee.tabs.cases')
+                                @include('admin.employee.top-tabs.consultations')
+                                @include('admin.employee.top-tabs.cases')
                             </div>
                         </div>
                     </div>

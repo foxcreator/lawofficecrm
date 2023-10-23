@@ -13,10 +13,9 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="row d-flex justify-content-between">
+                            @if($visitor->visitor_status != \App\Models\Visitor::IS_CLIENT)
                             <a href="{{ route('visitors.edit', $visitor->id) }}" class="btn btn-info btn-xs col-sm-3">Зробити
                                 клієнтом</a>
-                            @if($visitor->visitor_status)
-                                <button type="button" class="btn btn-dark btn-xs col-sm-3">Створити договір</button>
                             @endif
                         </div>
                         <ul class="list-group list-group-unbordered mb-3 mt-3">

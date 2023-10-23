@@ -5,7 +5,7 @@
             <thead>
             <tr>
                 <th>Номер справи</th>
-                <th>Адвокат</th>
+                <th>Клиент</th>
                 <th>Суть справи</th>
                 <th>Стаття</th>
                 <th>Етап виконання (статус)</th>
@@ -15,7 +15,7 @@
             @foreach($cases as $case)
                 <tr>
                     <td class="cell-limit">{{ $case->case_number }}</td>
-                    <td class="cell-limit">{{ $case->user->surname }} {{ $case->user->name }}</td>
+                    <td class="cell-limit">{{ $case->visitor->surname }} {{ $case->visitor->name }}</td>
                     <td class="cell-limit">{{ $case->category->name }}</td>
                     <td class="cell-limit">{{ $case->article->name }}</td>
                     <td class="cell-limit">{{ $case->case_status_name }}</td>

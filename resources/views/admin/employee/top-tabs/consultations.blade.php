@@ -7,7 +7,7 @@
             <tr>
                 <th>Приймальня</th>
                 <th>Дата Консультації</th>
-                <th>Консультант</th>
+                <th>Клиент</th>
                 <th>Категорія</th>
                 <th></th>
             </tr>
@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{ $consultation->reception->city }}-{{ $consultation->reception->number }}</td>
                     <td>{{ \Carbon\Carbon::create($consultation->consultation_date)->format('d.m.Y') }}</td>
-                    <td>{{ $consultation->user->surname }} {{ $consultation->user->name }}</td>
+                    <td>{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
                     <td>{{ $consultation->category->name }} </td>
                     <td>
                         @if($consultation->comment)

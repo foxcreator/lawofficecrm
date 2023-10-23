@@ -2,7 +2,8 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <img class="img-fluid" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
+
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -19,9 +20,9 @@
                         </div>
                     </div>
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @enderror
                 </div>
                 <div class="input-group mb-3">

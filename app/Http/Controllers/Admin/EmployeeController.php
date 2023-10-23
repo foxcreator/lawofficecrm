@@ -62,6 +62,8 @@ class EmployeeController extends Controller
         if (!auth()->user()->hasRole('super-user') && Auth::user()->id != $id) {
             abort(403, 'Доступ заблоковано');
         }
+        $winCasesCount = CourtCase::query()->where('user_id', $id)->where('case_status', 1)->count();
+        $casesCount = CourtCase::query()->where('user_id', $id)->count();
         $consultations = Consultation::query()->where('user_id', $id)->paginate(10);
         $cases = CourtCase::query()->where('user_id', $id)->paginate(10);
         $birthdate = $user->birthdate ? Carbon::createFromFormat('Y-m-d', $user->birthdate) : null;
@@ -69,7 +71,9 @@ class EmployeeController extends Controller
             'user',
             'birthdate',
             'consultations',
-            'cases'
+            'cases',
+            'casesCount',
+            'winCasesCount'
         ));
     }
 

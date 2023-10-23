@@ -116,7 +116,7 @@
                         <label for="role" class="col-2 col-form-label pl-0">Роль у фирмі</label>
                         <select name="role" id="role" class="custom-select col-3 @error('role') is-invalid @enderror">
                             @foreach($roles as $key => $role)
-                                <option value="{{ $key }}">{{ $role }}</option>
+                                <option value="{{ $key }}" @if (old('role') == $key) selected @endif>{{ $role }}</option>
                             @endforeach
                         </select>
                         @error('role')
@@ -129,7 +129,8 @@
                         <label for="customRadio1" class="col-2 @error('gender') is-invalid @enderror">Стать:</label>
                         @foreach($genders as $key => $gender)
                             <div class="custom-control custom-radio col-1">
-                                <input class="custom-control-input" value="{{ $key }}" type="radio"
+                                <input class="custom-control-input" value="{{ $key }}"
+                                       @if (old('gender') == $key) checked @endif type="radio"
                                        id="gender{{ $key }}" name="gender">
                                 <label for="gender{{ $key }}" class="custom-control-label">{{ $gender }}</label>
                             </div>
