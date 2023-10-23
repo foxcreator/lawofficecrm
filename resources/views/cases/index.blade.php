@@ -2,7 +2,6 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <!-- Main row -->
             <div class="card-body table-responsive p-0">
                 <a href="{{ route('cases.create') }}" class="btn btn-block btn-outline-dark btn-sm w-25">Відкрити
                     справу</a>
@@ -16,7 +15,7 @@
                             <th>Клієнт</th>
                             <th>Суть справи</th>
                             <th>Стаття</th>
-                            <th>Етап виконання</th>
+                            <th>Етап виконання (статус)</th>
                         </tr>
                         </thead>
                         <tbody>

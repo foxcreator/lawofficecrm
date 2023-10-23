@@ -33,7 +33,7 @@ class CreateEmployeeRequest extends FormRequest
             'birthdate' => 'required|date',
             'phone' => 'required|regex:/^\+\d{1,3}\(\d{3}\)\d{7}$/',
             'role' => 'required|in:0,1,2,3',
-            'gender' => 'required|in:0,1',
+            'gender' => 'required',
         ];
     }
 

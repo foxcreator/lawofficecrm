@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="form-group row additional-fields">
-                        <label for="passport_issued_by" class="col-sm-2 col-form-label">Кім виданий</label>
+                        <label for="passport_issued_by" class="col-sm-2 col-form-label">Ким виданий</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control @error('passport_issued_by') is-invalid @enderror" id="passport_issued_by"
                                    name="passport_issued_by" value="{{ old('passport_issued_by') }}" placeholder="Кім виданий">

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('category_id');
-            $table->string('google_drive_link');
+            $table->string('google_drive_link')->nullable();
             $table->smallInteger('case_status')->default(0);
             $table->timestamps();
 
