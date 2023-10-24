@@ -1,6 +1,6 @@
 @extends('layouts.notauth')
 @section('content')
-<div class="login-box">
+<div class="login-box bg-custom-blue">
     <div class="login-logo">
         <img class="img-fluid" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
 
