@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="case_number" class="col-sm-3 col-form-label">Номер справи</label>
+                                        <label for="case_number" class="col-sm-3 col-form-label">№ справи</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control @error('case_number') is-invalid @enderror" id="case_number"
                                                    name="case_number" value="{{ old('case_number') }}" placeholder="Номер справи">
@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="case_production_number" class="col-sm-3 col-form-label">Номер провадження</label>
+                                        <label for="case_production_number" class="col-sm-3 col-form-label">№ провадження</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control @error('case_production_number') is-invalid @enderror" id="case_production_number"
                                                    name="case_production_number" value="{{ old('case_production_number') }}" placeholder="Номер провадження">

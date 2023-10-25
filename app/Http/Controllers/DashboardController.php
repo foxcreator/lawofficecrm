@@ -6,6 +6,7 @@ use App\Models\Consultation;
 use App\Models\CourtCase;
 use App\Models\User;
 use App\Models\Visitor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -15,20 +16,18 @@ class DashboardController extends Controller
     public function index()
     {
         $consultationsThisMonth = Consultation::whereMonth('created_at', now()->month)->count();
-        $wonCasesTotal = CourtCase::where('case_status', 1)->count();
+        $wonCasesTotal = CourtCase::count();
         $newVisitorsThisMonth = Visitor::whereMonth('created_at', now()->month)->count();
 
         if (Auth::user()->hasRole(User::ROLE_ADMIN)) {
-            $cases = CourtCase::where('case_status', 0)->orderBy('id', 'desc')->take(5)->get();
-            $casesCount = CourtCase::where('case_status', 0)->count();
-            $consultations = Consultation::orderBy('id', 'desc')->take(5)->get();
+            $casesCount = CourtCase::all()->count();
+            $consultations = Consultation::where('consultation_date', Carbon::today())->orderBy('consultation_date', 'desc')->get();
             $consultationsCount = Consultation::all()->count();
 
             return view('dashboards.admin', compact(
                 'consultationsThisMonth',
                 'wonCasesTotal',
                 'newVisitorsThisMonth',
-                'cases',
                 'consultations',
                 'casesCount',
                 'consultationsCount',
