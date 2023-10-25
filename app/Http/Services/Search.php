@@ -16,8 +16,11 @@ class Search
             ->orWhere('comment', 'like', "%$searchTerm%")
             ->orWhereHas('visitor', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
+                $query->where('surname', 'like', "%$searchTerm%");
+                $query->where('father_name', 'like', "%$searchTerm%");
             })->orWhereHas('user', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
+                $query->where('surname', 'like', "%$searchTerm%");
             })->orWhereHas('article', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
@@ -33,8 +36,11 @@ class Search
             ->orWhere('comment', 'like', "%$searchTerm%")
             ->orWhereHas('visitor', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
+                $query->where('surname', 'like', "%$searchTerm%");
+                $query->where('father_name', 'like', "%$searchTerm%");
             })->orWhereHas('user', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
+                $query->where('surname', 'like', "%$searchTerm%");
             })->orWhereHas('reception', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
@@ -53,6 +59,7 @@ class Search
                 $query->where('email', 'like', "%$searchTerm%")
                     ->orWhere('name', 'like', "%$searchTerm%")
                     ->orWhere('surname', 'like', "%$searchTerm%")
+                    ->orWhere('father_name', 'like', "%$searchTerm%")
                     ->orWhere('tin_code', 'like', "%$searchTerm%")
                     ->orWhere('phone', 'like', "%$searchTerm%");
             }
