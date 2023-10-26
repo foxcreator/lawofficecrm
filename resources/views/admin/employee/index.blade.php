@@ -7,7 +7,7 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th>Прізвище Ім'я</th>
+                        <th class="text-left">Прізвище Ім'я</th>
                         <th>Дата народження</th>
                         <th>Роль у фирмі</th>
                     </tr>
@@ -16,7 +16,7 @@
                     @foreach($users as $user)
 
                         <tr>
-                            <td>{{ $user->surname }} {{ $user->name }}</td>
+                            <td class="text-left">{{ $user->surname }} {{ $user->name }}</td>
                             <td>{{ $user->birthdate }}</td>
                             <td>
                                 @if($user->getRoleNames()->first())

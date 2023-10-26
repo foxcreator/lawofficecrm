@@ -7,7 +7,7 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th>Прізвище Ім'я</th>
+                        <th class="text-left">Прізвище Ім'я</th>
                         <th>E-mail</th>
                         <th>Дата народження</th>
                         <th>Телефон</th>
@@ -18,7 +18,7 @@
                     @if($visitors)
                         @foreach($visitors as $visitor)
                             <tr>
-                                <td>{{ $visitor->surname }} {{ $visitor->name }}</td>
+                                <td class="text-left">{{ $visitor->surname }} {{ $visitor->name }}</td>
                                 <td>{{ $visitor->email }}</td>
                                 <td>{{ $visitor->birthdate }}</td>
                                 <td>{{ $visitor->phone }}</td>
