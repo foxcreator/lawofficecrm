@@ -9,7 +9,7 @@
                     <tr>
                         <th class="text-left">Прізвище Ім'я</th>
                         <th>Дата народження</th>
-                        <th>Роль у фирмі</th>
+                        <th>Роль у компанії</th>
                     </tr>
                     </thead>
                     <tbody>

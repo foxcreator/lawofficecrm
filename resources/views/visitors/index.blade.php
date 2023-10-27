@@ -10,7 +10,9 @@
                         <th class="text-left">Прізвище Ім'я</th>
                         <th>E-mail</th>
                         <th>Дата народження</th>
+                        @can('visitors-create')
                         <th>Телефон</th>
+                        @endcan
                         <th></th>
                     </tr>
                     </thead>
@@ -21,7 +23,9 @@
                                 <td class="text-left">{{ $visitor->surname }} {{ $visitor->name }}</td>
                                 <td>{{ $visitor->email }}</td>
                                 <td>{{ $visitor->birthdate }}</td>
+                                @can('visitors-create')
                                 <td>{{ $visitor->phone }}</td>
+                                @endcan
                                 <td>
                                     <a class="ml-1" href="{{ route('visitor', $visitor->id) }}" title="Детальніше">
                                         <i class="far fa-list-alt text-primary"></i>

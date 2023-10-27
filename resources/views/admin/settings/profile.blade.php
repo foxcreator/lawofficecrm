@@ -36,7 +36,7 @@
                                     <b>Усього справ</b> <a class="float-right">{{ $casesCount }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Стаж</b> <a class="float-right">3 роки</a>
+                                    <b>Філія</b> <a class="float-right">{{ $user->reception->city }} - {{ $user->reception->number }}</a>
                                 </li>
                             </ul>
                         </div>

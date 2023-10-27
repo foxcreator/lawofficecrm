@@ -3,8 +3,10 @@
     <div class="card card-info card-outline">
         <div class="card-header">
             <h2 class="card-title">
-                <a href="" class="btn-link text-dark" title="Редагувати"><i class="fas fa-edit"></i></a>
-                Справа №{{ $case->case_number }}
+                <a href="{{ $caseLink }}" class="btn-link text-dark" title="OpenDataBot" target="_blank">
+                    <i class="fas fa-link"></i>
+                    Справа №{{ $case->case_number }}
+                </a>
             </h2>
         </div>
         <div class="card-body row">

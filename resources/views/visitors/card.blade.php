@@ -22,9 +22,11 @@
                             <li class="list-group-item">
                                 <b>Email</b> <a class="float-right">{{ $visitor->email }}</a>
                             </li>
+                            @can('visitors-create')
                             <li class="list-group-item">
                                 <b>Телефон</b> <a class="float-right">{{ $visitor->phone }}</a>
                             </li>
+                            @endcan
                             <li class="list-group-item">
                                 <b>Дата народження</b> <a class="float-right">{{ \Carbon\Carbon::create($visitor->birthdate)->translatedFormat('d.m.Y') }}</a>
                             </li>

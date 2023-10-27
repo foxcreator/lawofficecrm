@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="role" class="col-2 col-form-label pl-0">Роль у фирмі</label>
+                        <label for="role" class="col-2 col-form-label pl-0">Роль у компанії</label>
                         <select name="role" id="role" class="custom-select col-3 @error('role') is-invalid @enderror">
                             @if($user->getRoleNames()->first())
                             <option value="{{ $user->getRoleNames()->first() }}">

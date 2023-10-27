@@ -175,13 +175,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('cases.index.status', 0) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Відкриті справи</p>
+                                    <p>Діючи справи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('cases.index.status', 1) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Архів</p>
+                                    <p>Архів справ</p>
                                 </a>
                             </li>
                         </ul>

@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(CourtCase::class, 'user_id');
     }
 
+    public function reception()
+    {
+        return $this->belongsTo(Reception::class, 'reception_id');
+    }
+
     public static function getRole()
     {
         return [
