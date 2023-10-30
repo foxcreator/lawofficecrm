@@ -8,7 +8,7 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th>Прізвище Ім'я</th>
+                        <th class="text-left">Прізвище Ім'я</th>
                         <th>Дата народження</th>
                         <th>Приймальня</th>
                         <th>Дата Консультації</th>
@@ -21,10 +21,10 @@
                     @if($consultations)
                         @foreach($consultations as $consultation)
                             <tr>
-                                <td>{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
-                                <td>{{ $consultation->visitor->birthdate }}</td>
+                                <td class="text-left">{{ $consultation->visitor->surname }} {{ $consultation->visitor->name }}</td>
+                                <td>{{ \Carbon\Carbon::create($consultation->visitor->birthdate)->format('d.m.Y') }}</td>
                                 <td>{{ $consultation->reception->city }}-{{ $consultation->reception->number }}</td>
-                                <td>{{ $consultation->consultation_date }}</td>
+                                <td>{{ \Carbon\Carbon::create($consultation->consultation_date)->format('d.m.Y') }}</td>
                                 <td>{{ $consultation->user->surname }} {{ $consultation->user->name }}</td>
                                 <td>{{ $consultation->category->name }} </td>
                                 <td>

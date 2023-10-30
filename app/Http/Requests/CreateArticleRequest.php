@@ -22,14 +22,14 @@ class CreateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:categories,name|max:25'
+            'name' => 'required|unique:articles,name|max:25'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.unique' => 'Таке і\'мя вже існує.',
+            'name.unique' => 'Така назва вже існує.',
             'name.max' => 'Назва не повинна бути довше 25 символів.',
             'name.required' => 'Введить назву!',
         ];

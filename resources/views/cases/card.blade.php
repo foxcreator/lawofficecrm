@@ -3,8 +3,10 @@
     <div class="card card-info card-outline">
         <div class="card-header">
             <h2 class="card-title">
-                <a href="" class="btn-link text-dark" title="Редагувати"><i class="fas fa-edit"></i></a>
-                Справа №{{ $case->case_number }}
+                <a href="{{ $caseLink }}" class="btn-link text-dark" title="OpenDataBot" target="_blank">
+                    <i class="fas fa-link"></i>
+                    Справа №{{ $case->case_number }}
+                </a>
             </h2>
         </div>
         <div class="card-body row">
@@ -38,6 +40,8 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile row d-flex justify-content-between">
+                        <button type="button" class="btn btn-dark btn-xs col-sm-3">Створити договір</button>
+
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
                         </a>

@@ -22,16 +22,28 @@ class CasesController extends Controller
         if (auth()->user()->hasRole(User::ROLE_ADVOCATE)) {
             $advocateId = auth()->id();
             if ($caseStatus == 0) {
-                $cases = CourtCase::where('case_status', 0)->where('id', $advocateId)->paginate(20);
+                $cases = CourtCase::where('case_status', 0)
+                    ->where('user_id', $advocateId)
+                    ->orderBy('id', 'desc')
+                    ->paginate(20);
             } else {
-                $cases = CourtCase::query()->whereNot('case_status', 0)->where('id', $advocateId)->paginate(20);
+                $cases = CourtCase::query()
+                    ->whereNot('case_status', 0)
+                    ->where('user_id', $advocateId)
+                    ->orderBy('id', 'desc')
+                    ->paginate(20);
             }
             return view('cases.index', compact('cases'));
         }
         if ($caseStatus == 0) {
-            $cases = CourtCase::where('case_status', 0)->paginate(20);
+            $cases = CourtCase::where('case_status', 0)
+                ->orderBy('id', 'desc')
+                ->paginate(20);
         } else {
-            $cases = CourtCase::query()->whereNot('case_status', 0)->paginate(20);
+            $cases = CourtCase::query()
+                ->whereNot('case_status', 0)
+                ->orderBy('id', 'desc')
+                ->paginate(20);
         }
         return view('cases.index', compact('cases'));
     }
@@ -66,7 +78,11 @@ class CasesController extends Controller
     public function show(string $id)
     {
         $case = CourtCase::where('id', $id)->first();
-        return view('cases.card', compact('case'));
+        $caseNumber = str_replace('/', '%2F', $case->case_number);
+        $caseLink = "https://court.opendatabot.ua/cause/{$caseNumber}";
+
+
+        return view('cases.card', compact('case', 'caseLink'));
     }
 
     public function edit(string $id)

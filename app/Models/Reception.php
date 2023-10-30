@@ -13,4 +13,9 @@ class Reception extends Model
     {
         return $this->hasMany(Consultation::class, 'category_id');
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'reception_id');
+    }
 }

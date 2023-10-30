@@ -81,14 +81,21 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('visitors.create') }}">Visitors</a>
-            </li>
         </ul>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
+
+            <li class="nav-item mr-2">
+                <a class="nav-link lis-link" href="https://www.lis.borisfen.net/" target="_blank"></a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="nav-link lms-link" href="https://lms.borisfen.net/" target="_blank"></a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="nav-link mail-link" href="https://webmail.adm.tools/" target="_blank"></a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="fas fa-search"></i>
@@ -168,13 +175,13 @@
                             <li class="nav-item">
                                 <a href="{{ route('cases.index.status', 0) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Відкриті справи</p>
+                                    <p>Діючи справи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('cases.index.status', 1) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Архив</p>
+                                    <p>Архів справ</p>
                                 </a>
                             </li>
                         </ul>
@@ -192,7 +199,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('consultations.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Всі консультаціі</p>
+                                    <p>Всі консультації</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -209,7 +216,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
-                                Відвідувачі
+                                Клієнтура
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -217,7 +224,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('visitors.index', \App\Models\Visitor::IS_GUEST) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Гості</p>
+                                    <p>Відвідувачи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -254,8 +261,6 @@
                         </ul>
                     </li>
                     @endcan
-                    <li class="nav-item">
-
 
                     <li class="nav-item">
                         <a href="{{ route('employee', Auth::user()) }}" class="nav-link">
@@ -263,40 +268,40 @@
                             <p>Мій профіль</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();"
+                        >
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Вийти</p>
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </ul>
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper bg-white pt-3">
-        <!-- Main content -->
         @yield('content')
-        <!-- /.content -->
     </div>
 
-    <footer class="main-footer">
+    <footer class="main-footer bg-custom-yellow">
         <strong>Copyright &copy; 2023 @if(\Carbon\Carbon::now()->year > '2023'){{ '- ' . \Carbon\Carbon::now()->year}} @endif <a href="https://www.borisfen.net/" target="_blank">ПАНП «Борисфен»</a></strong>
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0
         </div>
     </footer>
 
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
+
     </aside>
-    <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Подключаем jQuery (если еще не подключено) -->
-
 
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 
 <!-- jQuery -->
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>

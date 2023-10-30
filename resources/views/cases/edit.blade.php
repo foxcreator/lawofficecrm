@@ -147,7 +147,7 @@
                             </div>
                             <div class="card-footer row d-flex justify-content-between">
                                 <div class="col-md-5">
-
+                                    <a href="javascript:history.back()" class="btn btn-secondary btn-sm">Назад</a>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-sm btn-outline-success btn-block col-md-6 float-right">

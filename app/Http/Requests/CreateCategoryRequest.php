@@ -29,7 +29,7 @@ class CreateCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => 'Таке і\'мя вже існує.',
+            'name.unique' => 'Така назва вже існує.',
             'name.max' => 'Назва не повинна бути довше 25 символів.',
             'name.required' => 'Введить назву!',
         ];

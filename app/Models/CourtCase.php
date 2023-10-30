@@ -28,8 +28,8 @@ class CourtCase extends Model
     public function getCaseStatus()
     {
         return [
-            self::PENDING => 'Виконуєтся',
-            self::WIN => 'Виграна',
+            self::PENDING => 'Виконується',
+            self::WIN => 'Виграшна',
             self::LOSE => 'Програна',
         ];
     }

@@ -23,7 +23,7 @@
                             </p>
 
                             @role('super-user')
-                            @if(!auth()->user()->hasRole('super-user'))
+                            @if(auth()->user()->hasRole('super-user'))
                                 @if($user->is_working == 1)
                                     <form action="{{ route('admin.employee.toggle-working', $user->id) }}"
                                           method="POST">
@@ -45,9 +45,27 @@
                         </div>
                     </div>
                 </div>
-                @role('super-user')
                     @include('admin.settings.tabs')
-                @endrole
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#consultations" data-toggle="tab">Консультаціі</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cases" data-toggle="tab">Справи</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                @include('admin.employee.top-tabs.consultations')
+                                @include('admin.employee.top-tabs.cases')
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

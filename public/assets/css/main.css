@@ -2,6 +2,11 @@
     background-color: #001355;
 }
 
+.login-page {
+    background-color: #001355;!important;
+}
+
+
 .text-info {
     color: #001355;
 }
@@ -43,7 +48,40 @@ table th {
 }
 
 .nav-pills .nav-item .nav-link.active {
-    background-color: #117a8b;!important;
+    background-color: #001355;!important;
     opacity: 0.9;
     color: #FFFFFF;
+}
+
+.lis-link {
+    background-image: url("/assets/dist/img/Icons/icon_lis_yellow1.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s;
+}
+
+.lis-link:hover {
+    background-image: url("/assets/dist/img/Icons/icon_lis_yellow2.svg");
+}
+
+.lms-link {
+    background-image: url("/assets/dist/img/Icons/icon_lms_yellow1.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s;
+}
+
+.lms-link:hover {
+    background-image: url("/assets/dist/img/Icons/icon_lms_yellow2.svg");
+}
+
+.mail-link {
+    background-image: url("/assets/dist/img/Icons/icon_mail_yellow1.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s;
+}
+
+.mail-link:hover {
+    background-image: url("/assets/dist/img/Icons/icon_mail_yellow2.svg");
 }
