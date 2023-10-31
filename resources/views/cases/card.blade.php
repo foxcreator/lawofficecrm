@@ -40,7 +40,15 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile row d-flex justify-content-between">
-                        <a href="{{ route('generate.contract', $case->id) }}" class="btn btn-dark btn-xs col-sm-3" target="_blank">Створити договір</a>
+                        <a href="@if (!$case->isset_contract) {{ route('generate.contract', $case->id) }} @else {{ route('download.contract', $case->id) }} @endif" class="btn btn-dark btn-xs col-sm-3">
+                            @if (!$case->isset_contract)
+                                Створити договір
+                            @else
+                                Завантажити договір
+                            @endif
+                        </a>
+
+{{--                        <a href="{{ route('generate.contract', $case->id) }}" class="btn btn-dark btn-xs col-sm-3" target="_blank">Створити договір</a>--}}
 
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
