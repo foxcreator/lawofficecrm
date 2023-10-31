@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
 
-    Route::get('/generate-contract/{client}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
+    Route::get('/generate-contract/{case}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
 
 });
 //* TODO make functionality for reset password with Email  */
