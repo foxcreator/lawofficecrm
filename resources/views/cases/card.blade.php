@@ -48,8 +48,6 @@
                             @endif
                         </a>
 
-{{--                        <a href="{{ route('generate.contract', $case->id) }}" class="btn btn-dark btn-xs col-sm-3" target="_blank">Створити договір</a>--}}
-
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
                         </a>

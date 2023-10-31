@@ -67,7 +67,6 @@ class HomeController extends Controller
 
         $pdf->download($pdfFileName);
         return redirect()->back();
-
     }
 
     public function downloadContractAction($id)
@@ -101,6 +100,7 @@ class HomeController extends Controller
             'number' => $number->number,
             'formattedNumber' => $formattedNumber,
         ];
+
         return $numberData;
     }
 }
