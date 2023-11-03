@@ -214,16 +214,16 @@
             <p class="header-description">про надання правової допомоги</p>
         </div>
         <div class="subheader">
-            <div class="date-number">{{ \Carbon\Carbon::now()->translatedFormat('\«d\» F Y') }} року № 11/ДогП/01/2023</div>
+            <div class="date-number">{{ \Carbon\Carbon::now()->translatedFormat('\«d\» F Y') }} року № {{ $contractNumber }}</div>
             <div class="city">м. Дніпро</div>
         </div>
         <div class="par-1">
             <p>Правовий Альянс Науковців-Практиків «Борисфен» (ЄДРПОУ 39651357),
                 в особі її голови Гильт Галини Григорівни, яка діє на підставі Статуту та
                 адвокат {{ $case->user->surname }} {{ $case->user->name }} {{ $case->user->father_name }}, який займається адвокатською діяльністю на
-                підставі Свідоцтва про право на заняття адвокатською діяльністю №1866,
-                виданого Дніпропетровською КДКА 16 серпня 2008 року, (далі - Виконавець), з однієї сторони,
-                та {{ $case->visitor->surname }} {{ $case->visitor->name }} {{ $case->visitor->father_name }},{{ $birthdate->translatedFormat('d F Y') }} року народження, РНОКПП: {{ $case->visitor->tin_code }},
+                підставі Свідоцтва про право на заняття адвокатською діяльністю №{{ $case->user->license_number }},
+                виданого {{ $case->user->license_issued_by }} {{ $licenseWhenIssued->translatedFormat('d F Y') }} року, (далі - Виконавець), з однієї сторони,
+                та {{ $case->visitor->surname }} {{ $case->visitor->name }} {{ $case->visitor->father_name }}, {{ $birthdate->translatedFormat('d F Y') }} року народження, РНОКПП: {{ $case->visitor->tin_code }},
                 (далі - Клієнт) з другої сторони, уклали даний Договір про правову допомогу
                 (надалі – Договір) про наступне.</p>
         </div>

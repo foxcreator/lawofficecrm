@@ -57,14 +57,11 @@
             </form>
 
 
-            @if (Route::has('password.request'))
-                <p class="mb-1">
-                    <a href="{{ route('password.request') }}">Забули пароль</a>
-                </p>
-            @endif
-            <p class="mb-0">
-                <a href="{{ route('register') }}" class="text-center">Зареєструватися</a>
-            </p>
+{{--            @if (Route::has('password.request'))--}}
+{{--                <p class="mb-1">--}}
+{{--                    <a href="{{ route('password.request') }}">Забули пароль</a>--}}
+{{--                </p>--}}
+{{--            @endif--}}
         </div>
         <!-- /.login-card-body -->
     </div>
