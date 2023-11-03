@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-// ToDo Make Sorting data in all tables
+// ToDo Make Sorting data in all tables`
 
     public function contractAction(Request $request, $case)
     {

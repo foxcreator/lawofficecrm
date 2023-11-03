@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Services;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCaseRequest;
 use App\Models\Article;
 use App\Models\Category;
@@ -9,6 +10,10 @@ use App\Models\CourtCase;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use function abort;
+use function auth;
+use function redirect;
+use function view;
 
 class CasesController extends Controller
 {
@@ -33,6 +38,7 @@ class CasesController extends Controller
                     ->orderBy('id', 'desc')
                     ->paginate(20);
             }
+
             return view('cases.index', compact('cases'));
         }
         if ($caseStatus == 0) {
@@ -45,6 +51,7 @@ class CasesController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate(20);
         }
+
         return view('cases.index', compact('cases'));
     }
 
@@ -64,6 +71,7 @@ class CasesController extends Controller
                 'articles',
             ));
         }
+
         abort(404);
     }
 
@@ -73,6 +81,8 @@ class CasesController extends Controller
             CourtCase::create($request->validated());
             return redirect()->back()->with('status', 'Справу успішно відкрито!');
         }
+
+        abort(403);
     }
 
     public function show(string $id)
@@ -81,13 +91,11 @@ class CasesController extends Controller
         $caseNumber = str_replace('/', '%2F', $case->case_number);
         $caseLink = "https://court.opendatabot.ua/cause/{$caseNumber}";
 
-
         return view('cases.card', compact('case', 'caseLink'));
     }
 
     public function edit(string $id)
     {
-
         $case = CourtCase::where('id', $id)->first();
         $visitors = Visitor::where('visitor_status', '1')->get();
         $users = User::role('advocate')->get();
@@ -115,7 +123,7 @@ class CasesController extends Controller
             return redirect()->back()->with('status', "Справу №{$case->case_number} успішно оновлено");
         }
 
-        // ToDo maybe close case add to destroy method
+        return redirect()->back()->with('error', 'Smth is wrong');
     }
 
     public function destroy(string $id)

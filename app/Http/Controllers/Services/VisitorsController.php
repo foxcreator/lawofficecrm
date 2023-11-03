@@ -29,8 +29,10 @@ class VisitorsController extends Controller
     {
         $data = $request->validated();
         $visitor = Visitor::query()->create($data);
+
         if ($visitor) {
-            return redirect()->route('dashboard')->with('status', "{$visitor->visitor_status_name} успішно доданий!");
+            return redirect()->route('dashboard')
+                ->with('status', "{$visitor->visitor_status_name} успішно доданий!");
         }
 
         return redirect()->back()->with('error', 'Smth is wrong');
@@ -41,6 +43,7 @@ class VisitorsController extends Controller
     {
         $visitor = Visitor::find($id);
         $status = Visitor::getVisitorStatus();
+
         return view('visitors.edit', compact('visitor', 'status'));
     }
 
@@ -50,7 +53,8 @@ class VisitorsController extends Controller
 
         $visitor = Visitor::create($updateVisitorData);
         if ($visitor) {
-            return redirect()->route('visitors.index', $visitor->visitor_status)->with('status', "{$visitor->name} був успішно змінен");
+            return redirect()->route('visitors.index', $visitor->visitor_status)
+                ->with('status', "{$visitor->name} був успішно змінен");
         }
 
         return redirect()->back()->with('error', 'Smth is wrong');
@@ -61,6 +65,7 @@ class VisitorsController extends Controller
         $visitor = Visitor::find($id);
         $cases = CourtCase::query()->where('visitor_id', $id)->paginate(10);
         $consultations = Consultation::query()->where('visitor_id', $id)->paginate(10);
+
         return view('visitors.card', compact(
             'visitor',
             'cases',

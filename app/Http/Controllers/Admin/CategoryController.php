@@ -22,7 +22,6 @@ class CategoryController extends Controller
                 return response()->json(['errors' => $validator->errors()]);
             }
 
-            // Если валидация успешна, создайте категорию
             $category = Category::create($request->validated());
 
             if ($category) {

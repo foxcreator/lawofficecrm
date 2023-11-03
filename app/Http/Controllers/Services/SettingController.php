@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Services;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use function dd;
 
 class SettingController extends Controller
 {
@@ -15,22 +16,7 @@ class SettingController extends Controller
         $advocate = Role::findById(3);
         $guest = Role::findById(4);
         $dataAdmin = [
-            '1',
-//            '2',
-//            '3',
-//            '4',
-//            '5',
-            '6',
-//            '7',
-            '8',
-//            '9',
-//            '10',
-            '11',
-            '12',
-            '13',
-            '14',
-//            '15',
-//            '16',
+            //Add id roles to sync permission
         ];
         $permission = Permission::whereIn('id', $dataAdmin)->get();
 //        dd($permission);

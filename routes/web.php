@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +21,11 @@ if (!\Illuminate\Support\Facades\Auth::user()) {
     Route::get('/login');
 }
 Auth::routes();
-Route::get('/setting', [\App\Http\Controllers\SettingController::class, 'index']);
+Route::get('/setting', [\App\Http\Controllers\Services\SettingController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard')->middleware('can:dashboard');
-    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])
+    Route::get('/search', [\App\Http\Controllers\Services\SearchController::class, 'search'])
         ->name('search');
     Route::get('/employee-all', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])
         ->name('admin.employee.index')->middleware('can:employee-all');
@@ -63,9 +62,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('visitors.update')->middleware('can:visitors-update');
 
     //Create and view Consultations
-    Route::resource('consultations', \App\Http\Controllers\ConsultationsController::class)->middleware('can:consultation');
-    Route::resource('cases', \App\Http\Controllers\CasesController::class)->middleware('can:cases');
-    Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
+    Route::resource('consultations', \App\Http\Controllers\Services\ConsultationsController::class)->middleware('can:consultation');
+    Route::resource('cases', \App\Http\Controllers\Services\CasesController::class)->middleware('can:cases');
+    Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\Services\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
 
     Route::get('/generate-contract/{case}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
