@@ -103,7 +103,7 @@
                         <label for="phone" class="col-sm-2 col-form-label">Телефон</label>
                         <div class="col-sm-10">
                             <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone"
-                                   name="phone" value="{{ old('phone') }}" placeholder="+3(099)1234567">
+                                   name="phone" value="{{ old('phone') }}" placeholder="+38(099)1234567">
                             @error('phone')
                                 <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -111,6 +111,46 @@
                             @enderror
                         </div>
                     </div>
+                    <h5>Обов'язково для ролі адвокат</h5>
+                    <div class="line"></div>
+                    <div class="form-group row">
+                        <label for="licence_number" class="col-sm-2 col-form-label">Номер свідотства</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control @error('licence_number') is-invalid @enderror" id="licence_number"
+                                   name="licence_number" value="{{ old('licence_number') }}" placeholder="Обов'язково для ролі адвокат">
+                            @error('licence_number')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="licence_issued_by" class="col-sm-2 col-form-label">Кім видано свідотство</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control @error('licence_issued_by') is-invalid @enderror" id="licence_issued_by"
+                                   name="licence_issued_by" value="{{ old('licence_issued_by') }}" placeholder="Обов'язково для ролі адвокат">
+                            @error('licence_issued_by')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Коли видано:</label>
+                        <div class="input-group date col-sm-10" id="date">
+                            <input type="date" name="licence_when_issued"
+                                   class="form-control @error('licence_when_issued') is-invalid @enderror"
+                                   value="{{ old('licence_when_issued') }}"/>
+                            @error('licence_when_issued')
+                            <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="line"></div>
 
                     <div class="form-group">
                         <label for="role" class="col-2 col-form-label pl-0">Роль у компанії</label>

@@ -95,6 +95,7 @@ class EmployeeController extends Controller
             }
         }
         unset($updateData['_token']);
+//        dd($updateData);
         $user = User::find($id);
         $user->update($updateData);
         if (isset($data['role'])) {

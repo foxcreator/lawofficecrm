@@ -101,6 +101,58 @@
                         </div>
                     </div>
 
+                    @if($user->hasRole('advocate'))
+                    <div class="line"></div>
+                    <div class="form-group row">
+                        <label for="license_number" class="col-sm-2 col-form-label">Номер свідотства</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control @error('license_number') is-invalid @enderror"
+                                   id="license_number"
+                                   name="license_number" value="{{ $user->license_number }}"
+                                   placeholder="Обов'язково для ролі адвокат"
+                                   disabled
+                            >
+                            @error('license_number')
+                            <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="license_issued_by" class="col-sm-2 col-form-label">Кім видано свідотство</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control @error('license_issued_by') is-invalid @enderror"
+                                   id="license_issued_by"
+                                   name="license_issued_by" value="{{ $user->license_issued_by }}"
+                                   placeholder="Обов'язково для ролі адвокат"
+                                   disabled
+                            >
+                            @error('license_issued_by')
+                            <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Коли видано:</label>
+                        <div class="input-group date col-sm-10" id="date">
+                            <input type="date" name="license_when_issued"
+                                   class="form-control @error('license_when_issued') is-invalid @enderror"
+                                   value="{{ $user->license_when_issued }}"
+                                   disabled
+                            >
+                            @error('license_when_issued')
+                            <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    @endif
+
                     <div class="form-group">
                         <label for="role" class="col-2 col-form-label pl-0">Роль у компанії</label>
                         <select name="role" id="role" class="custom-select col-3 @error('role') is-invalid @enderror">

@@ -31,7 +31,7 @@ class CreateEmployeeRequest extends FormRequest
             'name' => 'required|min:3',
             'surname' => 'required|min:4',
             'birthdate' => 'required|date',
-            'phone' => 'required|regex:/^\+\d{1,3}\(\d{3}\)\d{7}$/',
+            'phone' => 'required|regex:/^\+\d{2}\(\d{3}\)\d{7}$/',
             'role' => 'required|in:0,1,2,3',
             'gender' => 'required',
         ];
@@ -50,7 +50,7 @@ class CreateEmployeeRequest extends FormRequest
             'birthdate.required' => 'Поле "Дата народження" обов\'язкове для заповнення.',
             'birthdate.date' => 'Будь ласка, введіть коректну дату.',
             'phone.required' => 'Поле "Номер телефону" обов\'язкове для заповнення.',
-            'phone.regex' => 'Будь ласка, введіть коректний номер телефону у форматі "+X(XXX)XXXXXXX".',
+            'phone.regex' => 'Будь ласка, введіть коректний номер телефону у форматі "+XX(XXX)XXXXXXX".',
             'role.required' => 'Будь ласка, оберіть роль.',
             'role.in' => 'Обрана неприпустима роль.',
             'gender.required' => 'Будь ласка, оберіть стать.',

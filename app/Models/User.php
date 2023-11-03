@@ -41,6 +41,9 @@ class User extends Authenticatable
         'phone',
         'gender',
         'is_working',
+        'license_number',
+        'license_issued_by',
+        'license_when_issued',
     ];
 
     /**
