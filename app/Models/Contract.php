@@ -14,5 +14,6 @@ class Contract extends Model
         'reception_number',
         'path',
         'name',
+        'case_id'
     ];
 }
