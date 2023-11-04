@@ -27,11 +27,7 @@ class User extends Authenticatable
     'advocate' => 'Адвокат',
     'guest' => 'Гість',
     ];
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
     protected $fillable = [
         'email',
         'password',

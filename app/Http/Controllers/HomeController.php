@@ -10,21 +10,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('home');
@@ -63,8 +53,8 @@ class HomeController extends Controller
             'name' => $pdfFileName,
             'case_id' => $case->id,
         ]);
-
         $pdf->download($pdfFileName);
+
         return redirect()->back()->with('success', 'Файл успішно збережено на сервері');
     }
 
@@ -80,6 +70,7 @@ class HomeController extends Controller
                 return response()->download($pdfPath);
             }
         }
+
         return redirect()->back()->with('error', 'Файл не знайдено на сервері.');
     }
 
@@ -96,7 +87,6 @@ class HomeController extends Controller
         }
 
         $formattedNumber = sprintf("%d/ДогП/%02d/%d", $number->number, 1, $currentYear);
-//        dd($formattedNumber);
         $numberData = [
             'number' => $number->number,
             'formattedNumber' => $formattedNumber,
