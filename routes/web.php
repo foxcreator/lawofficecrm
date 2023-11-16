@@ -64,13 +64,16 @@ Route::middleware(['auth'])->group(function () {
         ->name('visitors.update')->middleware('can:visitors-update');
 
     //Create and view Consultations
-    Route::resource('consultations', \App\Http\Controllers\ConsultationsController::class)->middleware('can:consultation');
-    Route::resource('cases', \App\Http\Controllers\CasesController::class)->middleware('can:cases');
-    Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
+    Route::resource('consultations', \App\Http\Controllers\Services\ConsultationsController::class)->middleware('can:consultation');
+    Route::resource('cases', \App\Http\Controllers\Services\CasesController::class)->middleware('can:cases');
+    Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\Services\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
 
+    Route::get('/generate-contract/test/{case}', [\App\Http\Controllers\HomeController::class, 'testing'])->name('generate.contract.sec');
     Route::get('/generate-contract/{case}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
     Route::get('download-contract/{id}', [\App\Http\Controllers\HomeController::class, 'downloadContractAction'])->name('download.contract');
+    Route::get('/about-system', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
+    Route::get('/policy', [\App\Http\Controllers\HomeController::class, 'policy'])->name('policy');
 
 
 });

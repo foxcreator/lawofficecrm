@@ -35,27 +35,28 @@ class HomeController extends Controller
             'contractNumber',
             'licenseWhenIssued'
         ));
+        $pdf->stream('document.pdf');
 
-        $pdfFileName = 'contract_' .
-            str_replace('/', '', $this->generateNumbers()['formattedNumber']) .
-            '.pdf';
-        $pdfPath = storage_path('app/public/contracts/') . $pdfFileName;
-        $pdf->save($pdfPath);
-
-        CourtCase::query()->where('id', $case->id)->update([
-            'isset_contract' => true,
-        ]);
-
-        Contract::create([
-            'number' => $this->generateNumbers()['number'],
-            'reception_number' => '01',
-            'path' => $pdfPath,
-            'name' => $pdfFileName,
-            'case_id' => $case->id,
-        ]);
-        $pdf->download($pdfFileName);
-
-        return redirect()->back()->with('success', 'Файл успішно збережено на сервері');
+//        $pdfFileName = 'contract_' .
+//            str_replace('/', '', $this->generateNumbers()['formattedNumber']) .
+//            '.pdf';
+//        $pdfPath = storage_path('app/public/contracts/') . $pdfFileName;
+//        $pdf->save($pdfPath);
+//
+//        CourtCase::query()->where('id', $case->id)->update([
+//            'isset_contract' => true,
+//        ]);
+//
+//        Contract::create([
+//            'number' => $this->generateNumbers()['number'],
+//            'reception_number' => '01',
+//            'path' => $pdfPath,
+//            'name' => $pdfFileName,
+//            'case_id' => $case->id,
+//        ]);
+//
+//        $pdf->download($pdfFileName);
+//        return redirect()->back()->with('success', 'Файл успішно збережено на сервері');
     }
 
     public function downloadContractAction($id)
@@ -93,5 +94,33 @@ class HomeController extends Controller
         ];
 
         return $numberData;
+    }
+
+    public function about()
+    {
+        return view('docs.about-system');
+    }
+
+    public function policy()
+    {
+        return view('docs.policy');
+    }
+
+    public function testing($case)
+    {
+        $case = CourtCase::find($case);
+        $birthdate = Carbon::create($case->visitor->birthdate);
+        $passportWhenIssued = Carbon::create($case->visitor->passport_when_issued);
+        $licenseWhenIssued = Carbon::create($case->user->license_when_issued);
+
+        $contractNumber = $this->generateNumbers()['formattedNumber'];
+        $pdf = PDF::loadView('docs.contract', compact(
+            'case',
+            'birthdate',
+            'passportWhenIssued',
+            'contractNumber',
+            'licenseWhenIssued'
+        ));
+        return $pdf->stream('document.pdf');
     }
 }

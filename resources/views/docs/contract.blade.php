@@ -14,6 +14,8 @@
 
         body {
             font-family: Roboto, serif;
+            margin-left: 20px;
+            margin-right: 20px;
         }
         h5 {
             margin: 0;
@@ -61,7 +63,12 @@
 
         .title-center {
             float: left;
+            bottom: 30px;
             width: 100px;
+        }
+
+        .title-center .image-center {
+            height: 95%;
         }
 
         .content {
@@ -112,9 +119,7 @@
 
         .contract-part p {
             text-align: left;
-
             text-indent: 30px;
-
         }
 
         .contract-part.footer {
@@ -123,19 +128,20 @@
             padding-top: 0;
             margin-top: 10px;
             width: 700px;
-            height: 85px;
+            height: 75px;
         }
 
         .footer-social {
             border-top: rgb(0,0,0, 0.5) solid 1px;
             border-bottom: rgb(0,0,0, 0.5) solid 1px;
-            height: 25px;
-            padding: 20px;
+            height: 20px;
+            padding: 0 0 20px 0;
         }
 
         .social {
             font-size: 10px;
             margin-right: 20px;
+            height: 15px;
         }
 
         .social-icon-container {
@@ -198,7 +204,9 @@
             </h4>
             <p><strong>Web:</strong> www.borisfen.net</p>
         </div>
-        <div class="title-center"></div>
+        <div class="title-center">
+            <img class="image-center" src="{{ public_path('assets/dist/img/Low_CRM_logo.png') }}" alt="">
+        </div>
         <div class="title-right">
             <h4>
                 LEGAL ALLIANCE <br>

@@ -17,7 +17,7 @@ class CreateSuperUserSeeder extends Seeder
      */
     public function run(): void
     {
-//        $superuser = User::create([
+//        $superuser = User::update([
 //            'name' => 'Adminko',
 //            'surname' => 'Adminenko',
 //            'birthdate' => fake()->date('2002-01-01'),
@@ -29,28 +29,6 @@ class CreateSuperUserSeeder extends Seeder
 //            'password' => Hash::make('admin12345'), // password
 //            'remember_token' => Str::random(10),
 //        ]);
-
-//        Role::create([
-//            'name' => 'super-user',
-//            'created_at' => Carbon::now(),
-//            'updated_at' => Carbon::now(),
-//        ]);
-        Role::create([
-            'name' => 'manager',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        Role::create([
-            'name' => 'advocate',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        Role::create([
-            'name' => 'guest',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
-//        $superuser->assignRole('super-user');
+//        $superuser->syncRoles(['super-user']);
     }
 }

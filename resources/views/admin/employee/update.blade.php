@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="license_issued_by" class="col-sm-2 col-form-label">Кім видано свідотство</label>
+                        <label for="license_issued_by" class="col-sm-2 col-form-label">Ким видано свідотство</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('license_issued_by') is-invalid @enderror"
                                    id="license_issued_by"

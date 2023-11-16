@@ -52,6 +52,7 @@
                             Матеріали справи
                         </a>
                         <a class="btn btn-xs btn-outline-info col-md-2" href="{{ route('cases.edit', $case->id) }}">Редагувати</a>
+                        @if($case->case_status == \App\Models\CourtCase::PENDING)
                         <button type="button"
                                 data-toggle="modal"
                                 data-target="#modal-close-case"
@@ -59,6 +60,7 @@
                                 >
                             Закрити справу
                         </button>
+                        @endif
                     </div>
                     <div class="card-body box-profile row d-flex justify-content-between">
 

@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="licence_issued_by" class="col-sm-2 col-form-label">Кім видано свідотство</label>
+                        <label for="licence_issued_by" class="col-sm-2 col-form-label">Ким видано свідотство</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('licence_issued_by') is-invalid @enderror" id="licence_issued_by"
                                    name="licence_issued_by" value="{{ old('licence_issued_by') }}" placeholder="Обов'язково для ролі адвокат">

@@ -2,7 +2,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <img class="img-fluid" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
+        <img class="img-fluid" src="{{ asset('assets/dist/img/logo.svg') }}" alt="BorisfenCrmLogo" height="60" width="60">
 
     </div>
     <!-- /.login-logo -->

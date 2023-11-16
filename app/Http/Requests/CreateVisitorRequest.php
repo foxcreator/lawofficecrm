@@ -29,7 +29,7 @@ class CreateVisitorRequest extends FormRequest
         if ($status == 1) {
             $rules += [
                 'tin_code' => 'required|digits:10|unique:visitors,tin_code',
-                'passport_number' => 'required|digits:10|unique:visitors,passport_number',
+                'passport_number' => 'required|digits:4,10|unique:visitors,passport_number',
                 'passport_issued_by' => 'required|string',
                 'passport_when_issued' => 'required|date',
                 'address' => 'required|string',

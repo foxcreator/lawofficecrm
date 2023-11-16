@@ -71,7 +71,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="BorisfenCrmLogo" height="60" width="60">
+        <img class="animation__wobble" src="{{ asset('assets/dist/img/logo.svg') }}" alt="BorisfenCrmLogo" height="60" width="60">
     </div>
 
     <!-- Navbar -->
@@ -86,6 +86,12 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
 
+            <li class="nav-item mr-2">
+                <a class="nav-link advocate-link" href="https://advocat.ua/" target="_blank"></a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link site-link" href="https://borisfen.net/" target="_blank"></a>
+            </li>
             <li class="nav-item mr-2">
                 <a class="nav-link lis-link" href="https://www.lis.borisfen.net/" target="_blank"></a>
             </li>
@@ -125,12 +131,15 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-custom-blue">
         <!-- Brand Logo -->
-        <a href="{{ route('dashboard') }}" class="brand-link align-items-center text-decoration-none">
-            <img src="{{ asset('assets/dist/img/Low_CRM_logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 mt-2 mr-4"
+        <a href="{{ route('dashboard') }}" class="row brand-link align-items-center d-flex text-decoration-none" title="Управління відносинами з клієнтами">
+            <img src="{{ asset('assets/dist/img/logo.svg') }}" height="70px" alt="AdminLTE Logo"  class="col-md-3 mr-0"
                  style="opacity: 1">
-            <span class="brand-text font-weight-light">Борисфен</span>
-            <p class="brand-text font-weight-light text-white-75" style="margin-left: 40px; font-size: 16px;">
-                CRM-System</p>
+            <div class="col-md-7 mt-2">
+                <p class="brand-text font-weight-light mb-0"><b style="font-size: 30px">CRM</b></p>
+                <p class="brand-text font-weight-light w-100 mt-0 mb-0" style="font-size: 12px">Customer relationship management</p>
+                <p class="brand-text font-weight-light text-white-75 mt-0" style="font-size: 16px;">
+                    ПАНП "Борисфен"</p>
+            </div>
         </a>
 
         <!-- Sidebar -->
@@ -288,9 +297,12 @@
         @yield('content')
     </div>
 
-    <footer class="main-footer bg-custom-yellow">
-        <strong>Copyright &copy; 2023 @if(\Carbon\Carbon::now()->year > '2023'){{ '- ' . \Carbon\Carbon::now()->year}} @endif <a href="https://www.borisfen.net/" target="_blank">ПАНП «Борисфен»</a></strong>
-        <div class="float-right d-none d-sm-inline-block">
+    <footer class="main-footer bg-custom-blue d-flex justify-content-between">
+        <strong  style="color: white">Copyright &copy; 2023 @if(\Carbon\Carbon::now()->year > '2023'){{ '- ' . \Carbon\Carbon::now()->year}} @endif <a href="https://www.borisfen.net/" target="_blank">ПАНП «Борисфен»</a></strong>
+        <strong><a href="{{ route('policy') }}">Політика конфіденційності</a></strong>
+        <strong><a href="{{ route('about') }}">Про систему</a></strong>
+
+        <div class="float-right d-none d-sm-inline-block" style="color: white">
             <b>Version</b> 1.0.0
         </div>
     </footer>
