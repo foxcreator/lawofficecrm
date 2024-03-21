@@ -14,16 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('dashboard');
-});
 
 if (!\Illuminate\Support\Facades\Auth::user()) {
     Route::get('/login');
 }
 Auth::routes();
-Route::get('/test', [\App\Http\Controllers\HomeController::class, 'testing']);
-Route::get('/setting', [\App\Http\Controllers\SettingController::class, 'index']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard')->middleware('can:dashboard');
@@ -69,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\Services\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
 
-    Route::get('/generate-contract/test/{case}', [\App\Http\Controllers\HomeController::class, 'testing'])->name('generate.contract.sec');
     Route::get('/generate-contract/{case}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
     Route::get('download-contract/{id}', [\App\Http\Controllers\HomeController::class, 'downloadContractAction'])->name('download.contract');
     Route::get('/about-system', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
