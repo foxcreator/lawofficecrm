@@ -22,7 +22,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard')->middleware('can:dashboard');
-    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])
+    Route::get('/search', [\App\Http\Controllers\Services\SearchController::class, 'search'])
         ->name('search');
     Route::get('/employee-all', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])
         ->name('admin.employee.index')->middleware('can:employee-all');
@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\Services\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
 
-    Route::get('/generate-contract/{case}', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
+    Route::post('/generate-contract/', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
     Route::get('download-contract/{id}', [\App\Http\Controllers\HomeController::class, 'downloadContractAction'])->name('download.contract');
     Route::get('/about-system', [\App\Http\Controllers\HomeController::class, 'about'])->name('about');
     Route::get('/policy', [\App\Http\Controllers\HomeController::class, 'policy'])->name('policy');

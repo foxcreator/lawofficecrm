@@ -40,13 +40,15 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile row d-flex justify-content-between">
-                        <a href="@if (!$case->isset_contract) {{ route('generate.contract', $case->id) }} @else {{ route('download.contract', $case->id) }} @endif" class="btn btn-dark btn-xs col-sm-3">
-                            @if (!$case->isset_contract)
+                        @if (!$case->isset_contract)
+                            <button type="button" class="btn btn-dark btn-xs col-sm-3" data-toggle="modal" data-target="#modal-lg">
                                 Створити договір
-                            @else
-                                Завантажити договір
-                            @endif
+                            </button>
+                        @else
+                        <a href="{{ route('download.contract', $case->id) }}" class="btn btn-dark btn-xs col-sm-3">
+                            Завантажити договір
                         </a>
+                        @endif
 
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
@@ -103,5 +105,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    @include('cases.contract-modal')
 
 @endsection

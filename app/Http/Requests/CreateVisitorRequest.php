@@ -24,15 +24,16 @@ class CreateVisitorRequest extends FormRequest
             'father_name' => 'required|string',
             'birthdate' => 'required|date',
             'phone' => 'required|string',
+            'personal_agree' => 'required'
         ];
 
         if ($status == 1) {
             $rules += [
                 'tin_code' => 'required|digits:10|unique:visitors,tin_code',
-                'passport_number' => 'required|digits:4,10|unique:visitors,passport_number',
+                'passport_number' => 'required|min:9|max:10|unique:visitors,passport_number',
                 'passport_issued_by' => 'required|string',
                 'passport_when_issued' => 'required|date',
-                'address' => 'required|string',
+                'address' => 'required|string|max:255',
             ];
         }
 
@@ -64,21 +65,22 @@ class CreateVisitorRequest extends FormRequest
             'phone.required' => 'Поле Телефон обов\'язкове до заповнення.',
             'phone.string' => 'Поле Телефон повинно бути рядком.',
 
-            'tin_code.required_if' => 'Поле ІПН обов\'язкове до заповнення для клієнта.',
+            'tin_code.required' => 'Поле ІПН обов\'язкове до заповнення для клієнта.',
             'tin_code.digits' => 'Поле ІПН повинно містити 10 цифр.',
             'tin_code.unique' => 'Користувач з таким ІПН вже існує.',
 
-            'passport_number.required_if' => 'Поле Номер паспорта обов\'язкове до заповнення для клієнта.',
-            'passport_number.digits' => 'Поле Номер паспорта повинно містити 10 цифр.',
+            'passport_number.required' => 'Поле Номер паспорта обов\'язкове до заповнення для клієнта.',
+            'passport_number.max' => 'Поле Номер паспорта повинно містити 9 або 10 символів.',
+            'passport_number.min' => 'Поле Номер паспорта повинно містити 9 або 10 символів.',
             'passport_number.unique' => 'Користувач з таким номером паспорта вже існує.',
 
-            'passport_issued_by.required_if' => 'Поле Кім виданий обов\'язкове до заповнення для клієнта.',
+            'passport_issued_by.required' => 'Поле Кім виданий обов\'язкове до заповнення для клієнта.',
             'passport_issued_by.string' => 'Поле Кім виданий повинно бути рядком.',
 
-            'passport_when_issued.required_if' => 'Поле Дата видачі обов\'язкове до заповнення для клієнта.',
+            'passport_when_issued.required' => 'Поле Дата видачі обов\'язкове до заповнення для клієнта.',
             'passport_when_issued.date' => 'Поле Дата видачі повинно бути датою.',
 
-            'address.required_if' => 'Поле Адреса обов\'язкове до заповнення для клієнта.',
+            'address.required' => 'Поле Адреса обов\'язкове до заповнення для клієнта.',
             'address.string' => 'Поле Адреса повинно бути рядком.',
         ];
     }

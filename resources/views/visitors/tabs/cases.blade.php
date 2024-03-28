@@ -1,6 +1,5 @@
 <div class="tab-pane" id="cases">
     @if($cases)
-
         <table class="table table-hover text-nowrap">
             <thead>
             <tr>
@@ -13,6 +12,7 @@
             </thead>
             <tbody>
             @foreach($cases as $case)
+
                 <tr>
                     <td class="cell-limit">{{ $case->case_number }}</td>
                     <td class="cell-limit">{{ $case->user->surname }} {{ $case->user->name }}</td>
@@ -30,9 +30,11 @@
                                 <i class="fas fa-comment-alt text-info"></i>
                             </a>
                         @endif
-                        <a class="ml-1" href="{{ route('cases.show', $case->id) }}" title="Детальніше">
-                            <i class="far fa-list-alt text-primary"></i>
-                        </a>
+                        @if($case->id)
+                            <a class="ml-1" href="{{ route('cases.show', $case->id) }}" title="Детальніше">
+                                <i class="far fa-list-alt text-primary"></i>
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

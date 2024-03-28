@@ -146,13 +146,18 @@
                         <label for="address" class="col-sm-2 col-form-label">Адреса</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                                   name="address" value="{{ old('address') }}" placeholder="Адреса" maxlength="10">
+                                   name="address" value="{{ old('address') }}" placeholder="Адреса">
                             @error('address')
                             <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="personal_agree" checked required>
+                        <label class="form-check-label">Згода на збір та обробку персональних даних отримана</label>
                     </div>
 
                 </div>

@@ -25,7 +25,7 @@ class Search
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
-            })->paginate(10);
+            })->paginate(20);
 
         return $cases;
     }
@@ -45,7 +45,7 @@ class Search
                 $query->where('name', 'like', "%$searchTerm%");
             })->orWhereHas('category', function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%$searchTerm%");
-            })->paginate(10);
+            })->paginate(20);
 
         return $consultations;
     }
@@ -63,7 +63,7 @@ class Search
                     ->orWhere('tin_code', 'like', "%$searchTerm%")
                     ->orWhere('phone', 'like', "%$searchTerm%");
             }
-        })->paginate(10);
+        })->paginate(20);
 
         return $visitors;
     }
@@ -79,7 +79,7 @@ class Search
                     ->orWhere('email', 'like', "%$term%")
                     ->orWhere('phone', 'like', "%$term%");
             }
-        })->paginate(10);
+        })->paginate(20);
 
         return $users;
     }

@@ -56,7 +56,9 @@ class CourtCase extends Model
 
     public function getCaseStatusNameAttribute()
     {
+
         $statuses = $this->getCaseStatus();
-        return $statuses[$this->attributes['case_status']];
+        $caseStatus = $this->attributes['case_status'] ?? null; // Проверяем, существует ли ключ
+        return $statuses[$caseStatus] ?? null;
     }
 }

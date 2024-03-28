@@ -20,9 +20,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function contractAction(Request $request, $case)
+    public function contractAction(Request $request)
     {
-        $case = CourtCase::find($case);
+
+        $contractSubject = $request->input('content');
+        $case = CourtCase::find($request->case);
         $birthdate = Carbon::create($case->visitor->birthdate);
         $passportWhenIssued = Carbon::create($case->visitor->passport_when_issued);
         $licenseWhenIssued = Carbon::create($case->user->license_when_issued);
@@ -33,7 +35,8 @@ class HomeController extends Controller
             'birthdate',
             'passportWhenIssued',
             'contractNumber',
-            'licenseWhenIssued'
+            'licenseWhenIssued',
+            'contractSubject',
         ));
 
         $pdfFileName = 'contract_' .

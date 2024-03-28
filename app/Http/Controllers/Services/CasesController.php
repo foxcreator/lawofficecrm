@@ -85,7 +85,7 @@ class CasesController extends Controller
         abort(403);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $case = CourtCase::where('id', $id)->first();
         $caseNumber = str_replace('/', '%2F', $case->case_number);
