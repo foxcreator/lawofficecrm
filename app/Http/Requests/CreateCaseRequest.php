@@ -19,10 +19,10 @@ class CreateCaseRequest extends FormRequest
         return [
             'visitor_id' => 'required|integer|exists:visitors,id',
             'user_id' => 'required|integer|exists:users,id',
-            'case_number' => 'required|string|max:255|unique:court_cases',
+            'case_number' => 'nullable|string|max:255|unique:court_cases',
             'category_id' => 'required|integer|exists:categories,id',
             'article_id' => 'required|integer|exists:articles,id',
-            'case_production_number' => 'required|string|max:255|unique:court_cases',
+            'case_production_number' => 'nullable|string|max:255|unique:court_cases',
             'google_drive_link' => 'nullable|url',
             'comment' => 'nullable|string|max:255',
         ];

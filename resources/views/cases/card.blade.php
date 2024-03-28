@@ -3,9 +3,8 @@
     <div class="card card-info card-outline">
         <div class="card-header">
             <h2 class="card-title">
-                <a href="{{ $caseLink }}" class="btn-link text-dark" title="OpenDataBot" target="_blank">
-                    <i class="fas fa-link"></i>
-                    Справа №{{ $case->case_number }}
+                <a href="#" class="btn-link text-dark">
+                    Справа за договіром №{{ $contractName }}
                 </a>
             </h2>
         </div>
@@ -30,6 +29,17 @@
                             <li class="list-group-item">
                                 <b>Номер провадження</b> <a class="float-right">№ {{ $case->case_production_number }}</a>
                             </li>
+                            <li class="list-group-item">
+                                <b>Номер справи</b>
+                                <a href="{{ $caseLink }}"
+                                   title="OpenDataBot"
+                                   class="float-right"
+                                   style="cursor:pointer;"
+                                   target="_blank"
+                                >
+                                    № {{ $case->case_number }} <i class="fas fa-link"></i>
+                                </a>
+                            </li>
                         </ul>
                         <div class="row d-flex justify-content-between">
                             <a href="javascript:history.back()" class="btn btn-secondary btn-sm">Назад</a>
@@ -40,13 +50,15 @@
             <div class="col-md-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile row d-flex justify-content-between">
-                        <a href="@if (!$case->isset_contract) {{ route('generate.contract', $case->id) }} @else {{ route('download.contract', $case->id) }} @endif" class="btn btn-dark btn-xs col-sm-3">
-                            @if (!$case->isset_contract)
+                        @if (!$case->isset_contract)
+                            <button type="button" class="btn btn-dark btn-xs col-sm-3" data-toggle="modal" data-target="#modal-lg">
                                 Створити договір
-                            @else
-                                Завантажити договір
-                            @endif
+                            </button>
+                        @else
+                        <a href="{{ route('download.contract', $case->id) }}" class="btn btn-dark btn-xs col-sm-3">
+                            Завантажити договір
                         </a>
+                        @endif
 
                         <a class="btn btn-xs btn-outline-info col-md-3" href="{{ $case->google_drive_link }}" target="_blank">
                             Матеріали справи
@@ -103,5 +115,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    @include('cases.contract-modal')
 
 @endsection

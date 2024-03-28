@@ -20,9 +20,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function contractAction(Request $request, $case)
+    public function contractAction(Request $request)
     {
-        $case = CourtCase::find($case);
+
+        $contractSubject = $request->input('content');
+        $case = CourtCase::find($request->case);
         $birthdate = Carbon::create($case->visitor->birthdate);
         $passportWhenIssued = Carbon::create($case->visitor->passport_when_issued);
         $licenseWhenIssued = Carbon::create($case->user->license_when_issued);
@@ -33,12 +35,12 @@ class HomeController extends Controller
             'birthdate',
             'passportWhenIssued',
             'contractNumber',
-            'licenseWhenIssued'
+            'licenseWhenIssued',
+            'contractSubject',
         ));
 
-        $pdfFileName = 'contract_' .
-            str_replace('/', '', $this->generateNumbers()['formattedNumber']) .
-            '.pdf';
+        $contractName = str_replace('/', '', $this->generateNumbers()['formattedNumber']);
+        $pdfFileName = 'contract_' . $contractName . '.pdf';
         $pdfPath = storage_path('app/public/contracts/') . $pdfFileName;
         $pdf->save($pdfPath);
 
@@ -50,7 +52,7 @@ class HomeController extends Controller
             'number' => $this->generateNumbers()['number'],
             'reception_number' => '01',
             'path' => $pdfPath,
-            'name' => $pdfFileName,
+            'name' => $contractName,
             'case_id' => $case->id,
         ]);
 

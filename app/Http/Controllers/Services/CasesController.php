@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCaseRequest;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Contract;
 use App\Models\CourtCase;
 use App\Models\User;
 use App\Models\Visitor;
@@ -85,13 +86,16 @@ class CasesController extends Controller
         abort(403);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $case = CourtCase::where('id', $id)->first();
+        $contract = Contract::where('case_id', $id)->first();
+        $contractName = $contract?->name;
+
         $caseNumber = str_replace('/', '%2F', $case->case_number);
         $caseLink = "https://court.opendatabot.ua/cause/{$caseNumber}";
 
-        return view('cases.card', compact('case', 'caseLink'));
+        return view('cases.card', compact('case', 'caseLink', 'contractName'));
     }
 
     public function edit(string $id)
