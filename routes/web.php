@@ -1,23 +1,17 @@
 <?php
 
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
-if (!\Illuminate\Support\Facades\Auth::user()) {
-    Route::get('/login');
+if (!Auth::user()) {
+    Route::get('/', function () {
+        return view('auth.login'); // Перенаправляйте на страницу входа или другую страницу, где пользователь может войти
+    });
+} else {
+    return redirect()->route('dashboard');
 }
+
+
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
@@ -63,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('cases', \App\Http\Controllers\Services\CasesController::class)->middleware('can:cases');
     Route::get('/cases/index/{caseStatus}', [\App\Http\Controllers\Services\CasesController::class, 'indexStatus'])->name('cases.index.status')->middleware('can:cases-change-status');
 
+    //** Contracts and docks links */
 
     Route::post('/generate-contract/', [\App\Http\Controllers\HomeController::class, 'contractAction'])->name('generate.contract');
     Route::get('download-contract/{id}', [\App\Http\Controllers\HomeController::class, 'downloadContractAction'])->name('download.contract');
