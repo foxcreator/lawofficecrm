@@ -3,9 +3,8 @@
     <div class="card card-info card-outline">
         <div class="card-header">
             <h2 class="card-title">
-                <a href="{{ $caseLink }}" class="btn-link text-dark" title="OpenDataBot" target="_blank">
-                    <i class="fas fa-link"></i>
-                    Справа №{{ $case->case_number }}
+                <a href="#" class="btn-link text-dark">
+                    Справа за договіром №{{ $contractName }}
                 </a>
             </h2>
         </div>
@@ -29,6 +28,17 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Номер провадження</b> <a class="float-right">№ {{ $case->case_production_number }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Номер справи</b>
+                                <a href="{{ $caseLink }}"
+                                   title="OpenDataBot"
+                                   class="float-right"
+                                   style="cursor:pointer;"
+                                   target="_blank"
+                                >
+                                    № {{ $case->case_number }} <i class="fas fa-link"></i>
+                                </a>
                             </li>
                         </ul>
                         <div class="row d-flex justify-content-between">

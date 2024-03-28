@@ -39,9 +39,8 @@ class HomeController extends Controller
             'contractSubject',
         ));
 
-        $pdfFileName = 'contract_' .
-            str_replace('/', '', $this->generateNumbers()['formattedNumber']) .
-            '.pdf';
+        $contractName = str_replace('/', '', $this->generateNumbers()['formattedNumber']);
+        $pdfFileName = 'contract_' . $contractName . '.pdf';
         $pdfPath = storage_path('app/public/contracts/') . $pdfFileName;
         $pdf->save($pdfPath);
 
@@ -53,7 +52,7 @@ class HomeController extends Controller
             'number' => $this->generateNumbers()['number'],
             'reception_number' => '01',
             'path' => $pdfPath,
-            'name' => $pdfFileName,
+            'name' => $contractName,
             'case_id' => $case->id,
         ]);
 
